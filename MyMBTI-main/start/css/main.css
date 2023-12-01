@@ -1,0 +1,11 @@
+/* 메인 섹션에 해당하는 css만 작성 */
+#main {
+  background-color: whitesmoke;
+  width: 80%;
+  text-align: center;
+  border-radius: 20px;
+}
+
+p {
+  font-size: 15px;
+}
