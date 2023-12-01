@@ -1,0 +1,11 @@
+.user-item {
+  margin: 1rem;
+  width: calc(45% - 2rem);
+  min-width: 17.5rem;
+}
+
+.user-item-image {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1rem;
+}
