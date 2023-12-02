@@ -1,0 +1,65 @@
+.main-header {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  background: #d5eaec;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.nav-link {
+  list-style: none;
+  display: flex;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  a:visited {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+   a:focus {
+    text-decoration: none;
+  }
+  a:hover,
+  a:active {
+    text-decoration: none;
+  }
+  /* text-decoration: none; */
+}
+.nav-link li {
+  margin: 1rem;
+}
+
+.nav-link a.active {
+  /* 기본적으로 보라색 및 기타 스타일이 지정되어 있을 것입니다. */
+  /* 아래의 스타일을 추가하거나 제거하여 원하는 스타일을 지정하세요. */
+
+  /* 스타일 제거 */
+  background: none;
+  border: none;
+  color: inherit;
+  text-decoration: none;
+
+  /* 또는 아무 스타일도 지정하지 않고 비워두세요. */
+}
+
+.nav-link a {
+  text-decoration: none;
+}
+
+/* .active 클래스는 현재 활성화된 링크에 적용 */
+/* .nav-link a.active {
+  background: none;
+  border-color: transparent;
+  color: #292929;
+  background-color: #e0e0e0;
+  text-decoration: none;
+} */

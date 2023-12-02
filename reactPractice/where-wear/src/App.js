@@ -9,10 +9,13 @@ import {
 import Users from "./User/pages/Users";
 import UserFeed from "./Feed/pages/UserFeed";
 import NewFeed from "./Feed/pages/NewFeed";
+import MainHeader from "./Shared/components/Navigation/MainHeader";
+import Login from "./User/pages/Login";
 
 const App = () => {
   return (
     <Router>
+      <MainHeader />
       <Switch>
         <Route path="/" exact={true}>
           <Users />
@@ -22,6 +25,9 @@ const App = () => {
         </Route>
         <Route path="/feed/new" exact={true}>
           <NewFeed />
+        </Route>
+        <Route path="/login" exact={true}>
+          <Login />
         </Route>
         <Redirect to="/" />
       </Switch>
