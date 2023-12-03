@@ -11,10 +11,11 @@ const FeedItem = (props) => {
         {props.title}
         <h3>Where did you buy it?</h3>
         {props.purchase}
-        <a href={props.link}></a>
       </div>
       <hr />
-      <button>상품 구경가기!</button>
+      <a href={props.link}>
+        <button>상품 구경가기!</button>
+      </a>
     </>
   );
 };
