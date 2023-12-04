@@ -1,13 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&family=Noto+Serif:wght@300&family=Roboto:wght@400;500&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Noto Serif", "Noto Serif KR", serif;
+  background-image: url("../src/Shared/static/bg.jpg"); /* 배경 이미지 경로를 여기에 추가하세요 */
+  background-size: cover; /* 화면에 꽉 차도록 배경 이미지 크기 조절 */
+  background-repeat: no-repeat; /* 배경 이미지 반복 없음 */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

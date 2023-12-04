@@ -1,9 +1,10 @@
 import React from "react";
 import FeedItem from "./FeedItem";
+import "./FeedList.css";
 
 const FeedList = (props) => {
   return (
-    <ul>
+    <ul className="feed-list">
       {props.items.map((feed) => (
         <FeedItem
           key={feed.id}

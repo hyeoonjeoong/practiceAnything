@@ -7,9 +7,14 @@
   top: 0;
   left: 0;
   display: flex;
-  background: #d5eaec;
+  /* background: #9badce; */
+  border-top: 1px solid #8e8e8e;
+  border-bottom: 1px solid #8e8e8e;
   margin-top: 1rem;
   justify-content: space-between;
+}
+.main-header div {
+  margin-left: 1.5rem;
 }
 
 .nav-link {

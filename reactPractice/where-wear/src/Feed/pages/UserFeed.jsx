@@ -20,7 +20,7 @@ const DUMMY_FEED = [
     title: "가방",
     purchase: "마뗑킴",
     link: "https://product.29cm.co.kr/catalog/2265357?source=item_detail&source_type=similar_item",
-    creator: "userId2",
+    creator: "userId1",
   },
 ];
 const UserFeed = () => {

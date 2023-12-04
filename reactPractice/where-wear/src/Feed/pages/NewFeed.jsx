@@ -3,7 +3,16 @@ import React from "react";
 const NewFeed = () => {
   return (
     <>
-      <div>NewFeed</div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NewFeed
+      </h3>
     </>
   );
 };

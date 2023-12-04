@@ -5,19 +5,20 @@
 }
 
 .user-item-image {
-  width: 4rem;
-  height: 4rem;
+  width: 6rem;
+  height: 6rem;
+
   margin-right: 1rem;
 }
 
 .user-item-btn {
   position: relative;
-  left: 25rem;
-  top: -3rem;
+  left: 26rem;
+  top: -4.2rem;
 }
 
 .user-item-feeds {
   position: relative;
   left: 21rem;
-  top: -2rem;
+  top: -3rem;
 }

@@ -10,7 +10,7 @@ const MainHeader = () => {
     <>
       <header className="main-header nav-link">
         <NavLink to="/">
-          <h2>WhereWear</h2>
+          <div className="logo">WhereWear</div>
         </NavLink>
         <NavLinks />
       </header>

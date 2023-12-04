@@ -1,0 +1,8 @@
+.feed-item {
+  margin: 1rem 3rem;
+  text-align: center;
+}
+
+.feed-item__img {
+  width: 400px;
+}
