@@ -11,23 +11,30 @@ const SideBar = () => {
       <div className="side-bar">
         <ul className="nav-link">
           <NavLink to="/admin" exact>
-            <li>대시 보드</li>
+            <ListItem icon="/sidebar/dashboard.svg" arrow="/sidebar/arrow.svg">
+              대시 보드
+            </ListItem>
           </NavLink>
           <NavLink to="/admin/products">
-            <li>상품 관리</li>
+            <ListItem icon="/sidebar/products.svg" arrow="/sidebar/arrow.svg">
+              상품 관리
+            </ListItem>
           </NavLink>
           <NavLink to="/admin/orders">
-            <li>거래내역 관리</li>
+            <ListItem icon="/sidebar/orders.svg" arrow="/sidebar/arrow.svg">
+              거래 내역 관리
+            </ListItem>
           </NavLink>
           <NavLink to="/admin/users">
-            <li>회원 관리</li>
+            <ListItem icon="/sidebar/users.svg" arrow="/sidebar/arrow.svg">
+              회원관리
+            </ListItem>
           </NavLink>
         </ul>
         <ul className="nav-link">
           {/* <NavLink to=""> */}
-          <li>나가기</li>
-          <ListItem icon="/sidebar/out.svg" arrow="/sidebar/out.svg">
-            리스트테스트
+          <ListItem icon="/sidebar/out.svg" arrow="/sidebar/arrow.svg">
+            나가기
           </ListItem>
           {/* </NavLink> */}
         </ul>

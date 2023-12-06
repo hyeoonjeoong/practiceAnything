@@ -9,5 +9,8 @@
 }
 
 .right-box {
-  background-color: #ddd;
+  /* background-color: #ddd; */
+}
+main {
+  margin: 20px; /* 원하는 여백 크기를 설정하세요 */
 }
