@@ -42,6 +42,14 @@ const PRODUCTS = [
     productStatus: "status",
     productInfo: "hi info",
   },
+  {
+    productID: 12,
+    productName: "flower",
+    categoryID: 3,
+    productPrice: 17000,
+    productStatus: "status",
+    productInfo: "hi info",
+  },
 ];
 const Products = () => {
   return (
