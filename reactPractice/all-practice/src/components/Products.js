@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import DataTable from "./DataTable.js";
+import DataTable02 from "./DataTable02.js";
 
 const header = [
   {
@@ -57,7 +58,10 @@ const DUMMY = [
 function Products() {
   return (
     <>
+      <h3>ver 1</h3>
       <DataTable keySet="productsTb_" headers={header} items={DUMMY} />
+      <h3>ver 1</h3>
+      <DataTable02 keySet="productsTb_" headers={header} items={DUMMY} />
     </>
   );
 }

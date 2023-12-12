@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import * as S from "./DataTableStyle.js";
+import * as S from "../styles/DataTableStyle.js";
 
 function DataTable({ keySet, headers, items }) {
   if (!headers || !headers.length) {
@@ -41,7 +41,6 @@ function DataTable({ keySet, headers, items }) {
       (index) => items[index]
     );
 
-    console.log("selectedAll", selectedAll);
     console.log("selectedAllContents", selectedAllContents);
   };
 
