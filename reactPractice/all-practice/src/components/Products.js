@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import DataTable from "./DataTable.js";
@@ -33,6 +33,10 @@ const header = [
     text: "정보",
     value: "productInfo",
   },
+  {
+    text: "배송 상태",
+    value: "deliveryStatus",
+  },
 ];
 
 const DUMMY = [
@@ -44,6 +48,7 @@ const DUMMY = [
     productPrice: 17000,
     productStatus: "판매중",
     productInfo: "이렇다",
+    deliveryStatus: "배송중",
   },
   {
     productID: 2,
@@ -53,14 +58,58 @@ const DUMMY = [
     productPrice: 17000,
     productStatus: "재고없음",
     productInfo: "저렇다",
+    deliveryStatus: "배송중",
   },
 ];
-function Products() {
+
+// function SelectBox() {
+//   return (
+//     <>
+//       <select name="aaaa">
+//         <option value="releaseStatus" disabled defaultValue>
+//           출고 상태 변경
+//         </option>
+//         <option value="payWait">결제 대기</option>
+//         <option value="deliveryStart">출고</option>
+//         <option value="cancel">취소</option>
+//       </select>
+//     </>
+//   );
+// }
+const SelectBox = () => {
   return (
     <>
+      <select name="aaaa">
+        <option value="releaseStatus" disabled defaultValue>
+          출고 상태 변경
+        </option>
+        <option value="payWait">결제 대기</option>
+        <option value="deliveryStart">출고</option>
+        <option value="cancel">취소</option>
+      </select>
+    </>
+  );
+};
+
+function Products() {
+  const [deliverySelectBox, setDeliverySelectBox] = useState("");
+
+  const DeliverySelectBox = (items) => {
+    console.log("아이템?", items);
+  };
+
+  DeliverySelectBox();
+  return (
+    <>
+      <SelectBox />
       <h3>ver 1</h3>
-      <DataTable keySet="productsTb_" headers={header} items={DUMMY} />
-      <h3>ver 1</h3>
+      <DataTable
+        keySet="productsTb_"
+        headers={header}
+        items={DUMMY}
+        selectBox={<SelectBox />}
+      />
+      <h3>ver 2(실패)</h3>
       <DataTable02 keySet="productsTb_" headers={header} items={DUMMY} />
     </>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import * as S from "../styles/DataTableStyle.js";
 
-function DataTable({ keySet, headers, items }) {
+function DataTable({ keySet, headers, items, selectBox }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -59,7 +59,9 @@ function DataTable({ keySet, headers, items }) {
               />
             </S.TableTd>
             {headers.map((header) => (
-              <S.TableHeader key={header.text}>{header.text}</S.TableHeader>
+              <S.TableHeader key={header.text}>
+                {header.value === "deliveryStatus" ? header.text : header.text}
+              </S.TableHeader>
             ))}
           </S.TableTr>
         </thead>
@@ -75,7 +77,7 @@ function DataTable({ keySet, headers, items }) {
               </S.TableTd>
               {headerList.map((value, columnIndex) => (
                 <S.TableTd key={`${keySet}_${index}_${columnIndex}`}>
-                  {item[value]}
+                  {value === "deliveryStatus" ? <SelectBox /> : item[value]}
                 </S.TableTd>
               ))}
             </S.TableTr>
@@ -85,5 +87,18 @@ function DataTable({ keySet, headers, items }) {
     </>
   );
 }
-
+const SelectBox = () => {
+  return (
+    <>
+      <select name="aaaa">
+        <option value="releaseStatus" disabled defaultValue>
+          출고 상태 변경
+        </option>
+        <option value="payWait">결제 대기</option>
+        <option value="deliveryStart">출고</option>
+        <option value="cancel">취소</option>
+      </select>
+    </>
+  );
+};
 export default DataTable;
