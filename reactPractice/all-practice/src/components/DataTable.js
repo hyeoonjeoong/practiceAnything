@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import * as S from "../styles/DataTableStyle.js";
 
-function DataTable({ keySet, headers, items, selectBox }) {
+function DataTable({ keySet, headers, items, selectBox, setItems, setDelete }) {
   if (!headers || !headers.length) {
     throw new Error("<DataTable /> headers is required.");
   }
@@ -25,7 +25,6 @@ function DataTable({ keySet, headers, items, selectBox }) {
     const selectedProductId = Array.from(newSelectedLists).map(
       (index) => items[index].productID
     );
-
     console.log("selectedContents", selectedContents);
     console.log("selectedProductId", selectedProductId);
   };
@@ -36,15 +35,21 @@ function DataTable({ keySet, headers, items, selectBox }) {
       selectedAll ? [] : items.map((_, index) => index)
     );
     setSelectedLists(newSelectedLists);
-
-    const selectedAllContents = Array.from(newSelectedLists).map(
-      (index) => items[index]
-    );
-
-    console.log("selectedAllContents", selectedAllContents);
   };
 
-  //헤더가 작성한 순서대로 보여질 수 있도록 value값만 확실히 뽑아내기
+  const handleDelete = () => {
+    const selectedIndexes = Array.from(selectedLists);
+    const updatedItems = items.filter(
+      (_, index) => !selectedIndexes.includes(index)
+    );
+    const deletedItems = selectedIndexes.map((index) => items[index]);
+    setItems(updatedItems);
+
+    console.log("삭제 전 배열", items);
+    console.log("뭐가 삭제될거니", deletedItems);
+    console.log("삭제 후 배열", updatedItems);
+  };
+
   const headerList = headers.map((header) => header.value);
   return (
     <>
@@ -84,6 +89,9 @@ function DataTable({ keySet, headers, items, selectBox }) {
           ))}
         </tbody>
       </S.Table>
+      {setDelete === "true" && (
+        <button onClick={handleDelete}>선택 상품 삭제하기</button>
+      )}
     </>
   );
 }

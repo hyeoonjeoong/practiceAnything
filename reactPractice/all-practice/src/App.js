@@ -2,6 +2,7 @@ import "./App.css";
 import Products from "./components/Products";
 import CheckBox from "./components/CheckBox";
 import Bank from "./components/Bank";
+import Barchart from "./components/Graph";
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
       <CheckBox />
       <h3 style={{ backgroundColor: "bisque" }}>Bank Practice</h3>
       <Bank />
+      <h3 style={{ backgroundColor: "bisque" }}>Barchart nivo</h3>
+      <Barchart />
     </>
   );
 }
