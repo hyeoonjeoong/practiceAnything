@@ -3,6 +3,7 @@ import Products from "./components/Products";
 import CheckBox from "./components/CheckBox";
 import Bank from "./components/Bank";
 import Barchart from "./components/Graph";
+import CommentList from "./firstMetReact/CommentList";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Bank />
       <h3 style={{ backgroundColor: "bisque" }}>Barchart nivo</h3>
       <Barchart />
+      <h3 style={{ backgroundColor: "bisque" }}>CommentList Practice</h3>
+      <CommentList />
     </>
   );
 }
