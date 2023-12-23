@@ -51,6 +51,16 @@ function App() {
     setPostList(newPostList);
   };
 
+  //🤎모달안됨
+  const handleModal = (postId) => {
+    const newPostList = [...postList];
+    const findItem = newPostList.findIndex((post) => post.postId === postId);
+    const selectedPost = newPostList[findItem];
+    if (selectedPost) {
+      setShowModal(!showModal);
+    }
+  };
+
   return (
     <>
       <div className="App">
@@ -61,7 +71,7 @@ function App() {
         {postList.map((post) => (
           <>
             <div className="list" key={post.postId}>
-              <h4 onClick={() => setShowModal(!showModal)}>{post.title} </h4>
+              <h4 onClick={(e) => handleModal(post.postId)}>{post.title} </h4>
               <h5>{post.date}</h5>
               <span
                 className="likeBtn"
