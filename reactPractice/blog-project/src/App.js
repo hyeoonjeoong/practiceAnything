@@ -42,20 +42,10 @@ function App() {
     setPostList(newPostList);
   };
 
-  // const handleLike = (postId) => {
-  //   const newPostList = [...postList];
-  //   const findItem = newPostList.findIndex((post) => post.postId === postId);
-  //   const selectedList = newPostList[findItem].like;
-
-  //   setLike(selectedList.like + 1);
-
-  //   console.log(newPostList.includes(findItem));
-  //   console.log(findItem);
-  //   console.log(selectedList.like);
-  // };
   const handleLike = (postId) => {
     const newPostList = [...postList];
     const findItem = newPostList.findIndex((post) => post.postId === postId);
+
     const selectedPost = newPostList[findItem];
     selectedPost.like += 1;
     setPostList(newPostList);
@@ -71,14 +61,15 @@ function App() {
         {postList.map((post) => (
           <>
             <div className="list" key={post.postId}>
-              <h4 onClick={() => setShowModal(!showModal)}>
-                {post.title}{" "}
-                <span onClick={(e) => handleLike(post.postId)}>
-                  좋아요👍🏻🤍{" "}
-                </span>
-                {post.like}
-              </h4>
+              <h4 onClick={() => setShowModal(!showModal)}>{post.title} </h4>
               <h5>{post.date}</h5>
+              <span
+                className="likeBtn"
+                onClick={(e) => handleLike(post.postId)}
+              >
+                좋아요👍🏻🤍{" "}
+              </span>
+              {post.like}
             </div>
             {showModal == true ? (
               <Modal

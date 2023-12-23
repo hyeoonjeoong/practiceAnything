@@ -38,3 +38,7 @@ div {
   background-color: whitesmoke;
   text-align: left;
 }
+
+.likeBtn {
+  cursor: pointer;
+}
