@@ -36,6 +36,7 @@ function App() {
   const [postList, setPostList] = useState(post);
   const [showModal, setShowModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [inputContentValue, setInputContentValue] = useState("");
 
   const handleSort = () => {
     const newPostList = [...postList];
@@ -63,20 +64,28 @@ function App() {
 
   const handleAddPost = () => {
     const newTitle = inputValue;
-    const newPostList = postList.concat({
-      postId: postIdRef.current + 1,
-      title: newTitle,
-      date: "11월 18일 발행",
-      content: "내용내용",
-      like: like,
-    });
+    const newContent = inputContentValue;
 
-    console.log(newPostList);
-    setPostList(newPostList);
-    setInputValue("");
+    if (newTitle && newContent !== "") {
+      const newPostList = postList.concat({
+        postId: postIdRef.current + 1,
+        title: newTitle,
+        date: getDate(),
+        content: newContent,
+        like: like,
+      });
 
-    //postIdRef.current = postIdRef.current +1
-    postIdRef.current += 1;
+      console.log(newPostList);
+      setPostList(newPostList);
+
+      setInputValue("");
+      setInputContentValue("");
+
+      //postIdRef.current = postIdRef.current +1
+      postIdRef.current += 1;
+    } else {
+      alert("글 제목과 내용을 모두 입력해주세요.");
+    }
   };
 
   const handleDelPost = (postId) => {
@@ -100,6 +109,14 @@ function App() {
                 setInputValue(e.target.value);
               }}
             />
+            <input
+              type="text"
+              placeholder="글 내용을 입력해주세요."
+              value={inputContentValue}
+              onChange={(e) => {
+                setInputContentValue(e.target.value);
+              }}
+            />
             <button onClick={handleAddPost}>글 발행</button>
           </div>
           <button className="sortBtn" onClick={handleSort}>
@@ -109,7 +126,10 @@ function App() {
         {postList.map((post) => (
           <>
             <div className="list" key={post.postId}>
-              <h4 onClick={() => handleModal(post.postId)}>
+              <h4
+                className="list-title"
+                onClick={() => handleModal(post.postId)}
+              >
                 {post.title}{" "}
                 <span
                   className="likeBtn"
@@ -122,7 +142,10 @@ function App() {
                 </span>{" "}
               </h4>
               <h5>{post.date}</h5>
-              <button onClick={() => handleDelPost(post.postId)}>
+              <button
+                className="delBtn"
+                onClick={() => handleDelPost(post.postId)}
+              >
                 글 삭제하기
               </button>
             </div>
@@ -147,12 +170,28 @@ function Modal(props) {
     <>
       <div className="modal">
         <h4>{props.title}</h4>
-        <h6>{props.date}</h6>
         <p>{props.content}</p>
-        <button onClick={props.closeModal}>닫기</button>
+        <h6>{props.date}</h6>
+        <button className="offBtn" onClick={props.closeModal}>
+          닫기
+        </button>
       </div>
     </>
   );
+}
+
+function getDate() {
+  const today = new Date();
+
+  const month = today.getMonth() + 1;
+  const date = today.getDate();
+
+  const hours = today.getHours();
+  const minutes = today.getMinutes();
+  const modifiedHour = hours < 10 ? `0${hours}` : hours;
+  const modifiedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  return `${month}월 ${date}일 ${modifiedHour}:${modifiedMinutes} 발행`;
 }
 
 export default App;

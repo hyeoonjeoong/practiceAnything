@@ -23,7 +23,9 @@ div {
   text-align: left;
   border-bottom: 1px solid gray;
 }
-
+.list-title {
+  cursor: pointer;
+}
 .black-nav {
   display: flex;
   background: black;
@@ -41,6 +43,15 @@ div {
 
 .likeBtn {
   cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 6px;
+  margin: 10px;
+
+  &:hover {
+    background-color: rgb(60, 60, 60);
+    color: whitesmoke;
+  }
 }
 
 .top-box {
@@ -48,4 +59,15 @@ div {
   margin-top: 20px;
   padding: 20px;
   justify-content: space-between;
+}
+
+.delBtn {
+  position: relative;
+  left: 926px;
+  bottom: 10px;
+}
+.offBtn {
+  position: relative;
+  left: 965px;
+  bottom: 10px;
 }
