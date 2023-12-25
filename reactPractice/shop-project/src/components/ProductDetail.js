@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import React from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
-import { Container, Nav, Row, Col } from "react-bootstrap";
+function ProductDetail(props) {
+  const { products } = props;
+  let { id } = useParams();
 
-import data from "../data.js";
-
-function ProductDetail() {
-  let [products] = useState(data);
+  const findProduct = products.find((product) => product.id == id);
+  console.log(findProduct);
+  if (!findProduct) {
+    console.log("상품을 찾을 수 없습니다.");
+  }
 
   return (
     <>
       <Container>
         <Row>
-          {products.map((product) => (
-            <>
-              <Col md={6}>
-                <img src={product.img} width="100%" />
-              </Col>
-              <Col md={6}>
-                <h4 className="pt-5">{product.title}</h4>
-                <p>{product.content}</p>
-                <p>{product.price}</p>
-                <button className="btn btn-danger">주문하기</button>
-              </Col>
-            </>
-          ))}
+          <React.Fragment key={findProduct.id}>
+            <Col md={6}>
+              <img src={findProduct.img} width="100%" alt={findProduct.title} />
+            </Col>
+            <Col md={6}>
+              <h4 className="pt-5">{findProduct.title}</h4>
+              <p>{findProduct.content}</p>
+              <p>{findProduct.price}</p>
+              <Button variant="dark">주문하기</Button>
+            </Col>
+          </React.Fragment>
         </Row>
       </Container>
     </>

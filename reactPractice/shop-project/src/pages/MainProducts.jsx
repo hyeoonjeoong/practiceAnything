@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-
 import { Container, Row, Col } from "react-bootstrap";
 
-import data from "../data.js";
 import Card from "../components/Card.js";
 
-function MainProducts() {
-  let [products] = useState(data);
+function MainProducts(props) {
+  const { products } = props;
 
   return (
     <>
@@ -14,7 +11,7 @@ function MainProducts() {
       <Container>
         <Row>
           {products.map((product) => (
-            <Col md={4}>
+            <Col md={4} key={product.id}>
               <Card
                 img={product.img}
                 title={product.title}
