@@ -2,12 +2,13 @@
 
 //💛 클릭했을 때 해당 postId값 찾아서 그것만 showModal 되도록
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import "./App.css";
 
 function App() {
   const [like, setLike] = useState(0);
+  const postIdRef = useRef(3);
 
   const post = [
     {
@@ -59,6 +60,30 @@ function App() {
   const closeModal = () => {
     setShowModal(null);
   };
+
+  const handleAddPost = () => {
+    const newTitle = inputValue;
+    const newPostList = postList.concat({
+      postId: postIdRef.current + 1,
+      title: newTitle,
+      date: "11월 18일 발행",
+      content: "내용내용",
+      like: like,
+    });
+
+    console.log(newPostList);
+    setPostList(newPostList);
+    setInputValue("");
+
+    //postIdRef.current = postIdRef.current +1
+    postIdRef.current += 1;
+  };
+
+  const handleDelPost = (postId) => {
+    const newPostList = postList.filter((post) => post.postId !== postId);
+    setPostList(newPostList);
+  };
+
   return (
     <>
       <div className="App">
@@ -70,12 +95,12 @@ function App() {
             <input
               type="text"
               placeholder="글 제목을 입력해주세요."
+              value={inputValue}
               onChange={(e) => {
                 setInputValue(e.target.value);
-                console.log(inputValue);
               }}
             />
-            <button>글 발행</button>
+            <button onClick={handleAddPost}>글 발행</button>
           </div>
           <button className="sortBtn" onClick={handleSort}>
             가나다 순 정렬
@@ -97,6 +122,9 @@ function App() {
                 </span>{" "}
               </h4>
               <h5>{post.date}</h5>
+              <button onClick={() => handleDelPost(post.postId)}>
+                글 삭제하기
+              </button>
             </div>
             {showModal === post.postId && (
               <Modal
