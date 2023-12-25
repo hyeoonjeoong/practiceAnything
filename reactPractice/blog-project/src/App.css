@@ -42,3 +42,10 @@ div {
 .likeBtn {
   cursor: pointer;
 }
+
+.top-box {
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  justify-content: space-between;
+}

@@ -34,6 +34,7 @@ function App() {
   ];
   const [postList, setPostList] = useState(post);
   const [showModal, setShowModal] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const handleSort = () => {
     const newPostList = [...postList];
@@ -51,44 +52,61 @@ function App() {
     setPostList(newPostList);
   };
 
-  //🤎모달안됨
-  // const handleModal = (postId) => {
-  //   const newPostList = [...postList];
-  //   const findItem = newPostList.findIndex((post) => post.postId === postId);
-  //   const selectedPost = newPostList[findItem];
-  //   if (selectedPost) {
-  //     setShowModal(!showModal);
-  //   }
-  // };
+  const handleModal = (postId) => {
+    setShowModal(postId);
+  };
 
+  const closeModal = () => {
+    setShowModal(null);
+  };
   return (
     <>
       <div className="App">
         <div className="black-nav">
           <h4>블로그</h4>
         </div>
-        <button onClick={handleSort}>가나다 순 정렬</button>
+        <div className="top-box">
+          <div>
+            <input
+              type="text"
+              placeholder="글 제목을 입력해주세요."
+              onChange={(e) => {
+                setInputValue(e.target.value);
+                console.log(inputValue);
+              }}
+            />
+            <button>글 발행</button>
+          </div>
+          <button className="sortBtn" onClick={handleSort}>
+            가나다 순 정렬
+          </button>
+        </div>
         {postList.map((post) => (
           <>
             <div className="list" key={post.postId}>
-              <h4 onClick={() => setShowModal(!showModal)}>{post.title} </h4>
+              <h4 onClick={() => handleModal(post.postId)}>
+                {post.title}{" "}
+                <span
+                  className="likeBtn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLike(post.postId);
+                  }}
+                >
+                  좋아요👍🏻🤍 {post.like}
+                </span>{" "}
+              </h4>
               <h5>{post.date}</h5>
-              <span
-                className="likeBtn"
-                onClick={(e) => handleLike(post.postId)}
-              >
-                좋아요👍🏻🤍{" "}
-              </span>
-              {post.like}
             </div>
-            {showModal == true ? (
+            {showModal === post.postId && (
               <Modal
                 id={post.postId}
                 title={post.title}
                 content={post.content}
                 date={post.date}
+                closeModal={closeModal}
               />
-            ) : null}
+            )}
           </>
         ))}
       </div>
@@ -103,6 +121,7 @@ function Modal(props) {
         <h4>{props.title}</h4>
         <h6>{props.date}</h6>
         <p>{props.content}</p>
+        <button onClick={props.closeModal}>닫기</button>
       </div>
     </>
   );
