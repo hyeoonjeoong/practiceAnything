@@ -1,5 +1,5 @@
 import React from "react";
-import { Address, MyShop } from "./model/shoppingMall";
+import { Address, MyShop } from "../types/shoppingMall";
 
 interface OwnProps {
   info: MyShop;
@@ -18,7 +18,26 @@ interface OwnProps {
 
 //가져올 때 객체형식으로
 const Store: React.FC<OwnProps> = ({ info }) => {
-  return <div>{info.name}</div>;
+  return (
+    <>
+      <h3>---Store---</h3>
+      <div>{info.name}</div>
+      {/* MyShop*/}
+      <div>category: {info.category}</div>
+      <div>address.city: {info.address.city}</div>
+      <div>address.detail: {info.address.detail}</div>
+      <div>address.zipCode: {info.address.zipCode}</div>
+      {/* 아이템 표시 */}
+      <h4>아이템:</h4>
+      <ul>
+        {info.item.map((item, index) => (
+          <li key={index}>
+            {item.name}, {item.price}, {item.category}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 };
 
 export default Store;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Store from "./Store";
-import { Address, MyShop } from "./model/shoppingMall";
+import Store from "./pages/Store";
+import { Address, MyShop } from "./types/shoppingMall";
+import BestItem from "./pages/BestItem";
 
 //let 변수명:타입명
 let data: MyShop = {
@@ -29,10 +29,19 @@ const App: React.FC = () => {
     setMyShop({ ...myShop, address: address });
   };
 
+  const showBestItem = (name: string) => {
+    return name;
+  };
   return (
     <div className="App">
       {/* Store에서 props를 받아줄 때의 type도 정해줘야 한다. */}
       <Store info={myShop} changeAddress={changeAddress} />
+      <BestItem
+        name="ring"
+        category="acc"
+        price={11000}
+        showBestItem={showBestItem}
+      />
     </div>
   );
 };
