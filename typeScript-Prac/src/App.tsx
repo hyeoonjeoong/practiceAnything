@@ -3,6 +3,13 @@ import "./App.css";
 import Store from "./pages/Store";
 import { Address, MyShop } from "./types/shoppingMall";
 import BestItem from "./pages/BestItem";
+import Map from "./pages/Map";
+
+declare global {
+  interface Window {
+    naver: any;
+  }
+}
 
 //let 변수명:타입명
 let data: MyShop = {
@@ -42,6 +49,7 @@ const App: React.FC = () => {
         price={11000}
         showBestItem={showBestItem}
       />
+      <Map />
     </div>
   );
 };
