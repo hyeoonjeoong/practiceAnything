@@ -7,6 +7,7 @@ import BestItem from "./pages/BestItem";
 // import Map02 from "./pages/Map02";
 // import Map03 from "./pages/Map03";
 import KakaoMap01 from "./pages/KakaoMap01";
+import KakaoMap02 from "./pages/KakaoMap02";
 
 //let 변수명:타입명
 let data: MyShop = {
@@ -49,8 +50,19 @@ const App: React.FC = () => {
       {/* <Map01 /> */}
       {/* <Map02 /> */}
       {/* <Map03 /> */}
-      <h3>KakaoMap</h3>
+      <ul>
+        <li>화면 이동함에 따라 바뀌게</li>
+        <li>클릭했을떄 뜨는 정보 안사라진다</li>
+        <li></li>
+      </ul>
+      <h3>KakaoMap01 - 지역 키워드로 검색 시 "술집" 더해져서 검색</h3>
       <KakaoMap01 />
+      <h3>KakaoMap02 - 업종에 맞춰 가져오기 (술집)</h3>
+      <p>
+        지금은 음식점만 오고있어서 술집, 이자카야 등 키워드 추가해서 전체
+        보여줘야함
+      </p>
+      <KakaoMap02 />
     </div>
   );
 };
