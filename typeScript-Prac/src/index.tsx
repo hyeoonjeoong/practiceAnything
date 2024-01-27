@@ -4,6 +4,14 @@ import "./index.css";
 import App from "./App";
 // import reportWebVitals from './reportWebVitals';
 
+//--map01
+// declare global {
+//   interface Window {
+//     naver: any;
+//   }
+// }
+//---
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

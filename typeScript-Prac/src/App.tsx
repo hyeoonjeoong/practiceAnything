@@ -3,13 +3,10 @@ import "./App.css";
 import Store from "./pages/Store";
 import { Address, MyShop } from "./types/shoppingMall";
 import BestItem from "./pages/BestItem";
-import Map from "./pages/Map";
-
-declare global {
-  interface Window {
-    naver: any;
-  }
-}
+// import Map01 from "./pages/Map01";
+// import Map02 from "./pages/Map02";
+// import Map03 from "./pages/Map03";
+import KakaoMap01 from "./pages/KakaoMap01";
 
 //let 변수명:타입명
 let data: MyShop = {
@@ -42,14 +39,18 @@ const App: React.FC = () => {
   return (
     <div className="App">
       {/* Store에서 props를 받아줄 때의 type도 정해줘야 한다. */}
-      <Store info={myShop} changeAddress={changeAddress} />
+      {/* <Store info={myShop} changeAddress={changeAddress} />
       <BestItem
         name="ring"
         category="acc"
         price={11000}
         showBestItem={showBestItem}
-      />
-      <Map />
+      /> */}
+      {/* <Map01 /> */}
+      {/* <Map02 /> */}
+      {/* <Map03 /> */}
+      <h3>KakaoMap</h3>
+      <KakaoMap01 />
     </div>
   );
 };
