@@ -59,10 +59,16 @@ const KakaoMap02 = () => {
 
           console.log(region2depth);
           console.log(region3depth); //얘는 되는데 세터함수 변경이 안되고있따. 지도 바뀔때ㅏ다
-          console.log("centerRegion", centerRegion);
 
           // setCenterRegion를 호출한 후에 주소 정보를 업데이트합니다.
-          setCenterRegion(`${region2depth} ${region3depth}`);
+          const updatedCenterRegion = `${region2depth} ${region3depth}`;
+          // 상태 업데이트는 여기서 한 번만 실행됩니다.
+          if (updatedCenterRegion !== centerRegion) {
+            setCenterRegion(updatedCenterRegion);
+          }
+          // setCenterRegion를 호출한 후에 주소 정보를 업데이트합니다.
+          // setCenterRegion(`${region2depth} ${region3depth}`);
+          // console.log("centerRegion", centerRegion);
         }
         // for (let i = 0; i < result.length; i++) {
         //   infoDiv.innerHTML = result[i].address_name;
@@ -85,9 +91,15 @@ const KakaoMap02 = () => {
     // ps2.keywordSearch("이태원 일본식주점", placesSearchCB);
     // ps2.keywordSearch("이태원 칵테일", placesSearchCB);
 
-    ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
-    ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
-    ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
+    if (centerRegion) {
+      const ps2 = new window.kakao.maps.services.Places();
+      ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
+      ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
+      ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
+    }
+    // ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
+    // ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
+    // ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
 
     // 키워드 검색 완료 시 호출되는 콜백함수
     function placesSearchCB(data: any, status: any, pagination: any) {
@@ -125,6 +137,9 @@ const KakaoMap02 = () => {
       });
     }
   }, []);
+  useEffect(() => {
+    console.log("centerRegion", centerRegion);
+  }, [centerRegion]);
 
   return (
     <>
