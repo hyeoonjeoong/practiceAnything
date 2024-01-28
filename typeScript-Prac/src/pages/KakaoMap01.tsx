@@ -32,17 +32,17 @@ const KakaoMap01 = () => {
 
       const ps = new window.kakao.maps.services.Places(newMap);
       // 기본 검색어를 "술집"으로 설정
-      ps.categorySearch("FD6", placesSearchCB, { useMapBounds: true });
+      // ps.categorySearch("FD6", placesSearchCB, { useMapBounds: true });
 
-      function placesSearchCB(data: any, status: any) {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const bounds = new window.kakao.maps.LatLngBounds();
-          for (let i = 0; i < data.length; i++) {
-            displayMarker(newMap, data[i], bounds);
-          }
-          newMap.setBounds(bounds);
-        }
-      }
+      // function placesSearchCB(data: any, status: any) {
+      //   if (status === window.kakao.maps.services.Status.OK) {
+      //     const bounds = new window.kakao.maps.LatLngBounds();
+      //     for (let i = 0; i < data.length; i++) {
+      //       displayMarker(newMap, data[i], bounds);
+      //     }
+      //     newMap.setBounds(bounds);
+      //   }
+      // }
 
       function displayMarker(map: any, place: any, bounds: any) {
         const marker = new window.kakao.maps.Marker({
@@ -74,10 +74,21 @@ const KakaoMap01 = () => {
     const keyword = keywordInput.value;
 
     if (keyword) {
-      const combinedKeyword = `${keyword} 술집`;
+      const searchCategories = [
+        "술집",
+        "호프",
+        "요리주점",
+        "포장마차",
+        "오뎅바",
+        "와인바",
+        "일본식주점",
+        "칵테일바",
+      ];
 
       const ps = new window.kakao.maps.services.Places(map);
-      ps.keywordSearch(combinedKeyword, placesSearchCB);
+      searchCategories.forEach((category) => {
+        ps.keywordSearch(`${keyword} ${category}`, placesSearchCB);
+      });
 
       function placesSearchCB(data: any, status: any) {
         if (status === window.kakao.maps.services.Status.OK) {
@@ -112,6 +123,11 @@ const KakaoMap01 = () => {
 
   return (
     <>
+      <h3>KakaoMap01 - 지역명 검색 시 "술집 카테고리" 더해져서 검색</h3>
+      <ul>
+        <li>"용산" 검색 시 "용산 술집", "용산 이자카야"로 검색되도록</li>
+        <li>클릭했을떄 뜨는 정보 안사라진다</li>
+      </ul>
       <Map id="map" />
       <div>
         <input type="text" id="searchInput" placeholder="장소를 검색하세요" />
