@@ -16,6 +16,7 @@ const Map2 = styled.div`
 const KakaoMap02 = () => {
   // 지도 이동에 따라 추출되는 주소 값 저장
   const [centerRegion, setCenterRegion] = React.useState<string | null>(null);
+
   //-----------------------------------------기본 지도 생성
   useEffect(() => {
     // 마커를 클릭하면 장소명을 표출할 인포윈도우
@@ -87,16 +88,16 @@ const KakaoMap02 = () => {
     const ps2 = new window.kakao.maps.services.Places();
 
     // 키워드로 장소를 검색
-    // ps2.keywordSearch("이태원 이자카야", placesSearchCB);
-    // ps2.keywordSearch("이태원 일본식주점", placesSearchCB);
-    // ps2.keywordSearch("이태원 칵테일", placesSearchCB);
+    ps2.keywordSearch("종로 이자카야", placesSearchCB);
+    ps2.keywordSearch("종로 일본식주점", placesSearchCB);
+    ps2.keywordSearch("종로 칵테일", placesSearchCB);
 
-    if (centerRegion) {
-      const ps2 = new window.kakao.maps.services.Places();
-      ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
-      ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
-      ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
-    }
+    // if (centerRegion) {
+    //   const ps2 = new window.kakao.maps.services.Places();
+    //   ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
+    //   ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
+    //   ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
+    // }
     // ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
     // ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
     // ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
@@ -139,6 +140,17 @@ const KakaoMap02 = () => {
   }, []);
   useEffect(() => {
     console.log("centerRegion", centerRegion);
+
+    // if(centerRegion) {
+    //   const ps2 = new window.kakao.maps.services.Places();
+
+    //   ps2.keywordSearch(`${centerRegion} 이자카야`, placesSearchCB);
+    //   ps2.keywordSearch(`${centerRegion} 일본식주점`, placesSearchCB);
+    //   ps2.keywordSearch(`${centerRegion} 칵테일`, placesSearchCB);
+    // }
+    // ps2.keywordSearch(`${centerRegion} 이자카야 `, placesSearchCB);
+    // ps2.keywordSearch(`${centerRegion} 일본식주점 `, placesSearchCB);
+    // ps2.keywordSearch(`${centerRegion} 칵테일 `, placesSearchCB);
   }, [centerRegion]);
 
   return (

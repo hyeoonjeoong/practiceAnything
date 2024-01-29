@@ -57,7 +57,7 @@ const App: React.FC = () => {
 
       <KakaoMap02 />
 
-      <KakaoMap03 />
+      {/* <KakaoMap03 /> */}
     </div>
   );
 };
