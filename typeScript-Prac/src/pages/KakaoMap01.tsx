@@ -70,8 +70,16 @@ const KakaoMap01 = () => {
       const keywordInput = document.getElementById(
         "searchInput"
       ) as HTMLInputElement;
-      const keyword = keywordInput.value;
+      let keyword = keywordInput.value.trim();
+
       if (keyword) {
+        // 맨 마지막 글자가 "구"나 "동"이면 마지막 한글자를 제외합니다.
+        const lastChar = keyword.charAt(keyword.length - 1);
+        const updatedKeyword =
+          lastChar === "구" || lastChar === "동"
+            ? keyword.slice(0, -1)
+            : keyword;
+
         const searchCategories = [
           "술집",
           "호프",
@@ -84,8 +92,17 @@ const KakaoMap01 = () => {
         ];
 
         const ps = new window.kakao.maps.services.Places(map);
+
+        //사용자 입력 -구, -동 + 카테고리
+        searchCategories.forEach((category) => {
+          ps.keywordSearch(`${updatedKeyword} ${category}`, placesSearchCB);
+          console.log(`${updatedKeyword} ${category}`);
+        });
+
+        //사용자 입력 + 카테고리
         searchCategories.forEach((category) => {
           ps.keywordSearch(`${keyword} ${category}`, placesSearchCB);
+          console.log(`${keyword} ${category}`);
         });
 
         function placesSearchCB(data: any, status: any) {
