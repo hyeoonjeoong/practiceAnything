@@ -16,6 +16,8 @@ const Map = styled.div`
 const KakaoMap01 = () => {
   const [map, setMap] = useState<any>(null);
   const [centerRegion, setCenterRegion] = useState<string>("");
+  const [keyword, setKeyword] = useState("");
+  const [moveKeyword, setMoveKeyword] = useState("");
 
   useEffect(() => {
     const initializeMap = () => {
@@ -42,6 +44,12 @@ const KakaoMap01 = () => {
             // setCenterRegion를 호출한 후에 주소 정보를 업데이트합니다.
             const updatedCenterRegion = result[0].address_name;
             setCenterRegion(updatedCenterRegion);
+
+            console.log("22222depth: ", updatedCenterRegion);
+            console.log("2depth: ", result[0].region_2depth_name);
+            console.log("3depth: ", result[0].region_3depth_name);
+            //setMoveKeyword(`${result[0].region_2depth_name}`);
+            setMoveKeyword(`${result[0].region_3depth_name}`);
           }
         }
       }
@@ -65,6 +73,14 @@ const KakaoMap01 = () => {
 
     initializeMap();
   }, []);
+
+  useEffect(() => {
+    // 키워드 값 바뀔때마다 검색
+    // handleSearch();
+
+    console.log(moveKeyword);
+  }, [moveKeyword]);
+
   const handleSearch = () => {
     if (map) {
       const keywordInput = document.getElementById(
@@ -136,7 +152,9 @@ const KakaoMap01 = () => {
       }
     }
   };
-
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
   return (
     <>
       <h3>KakaoMap01 - 지역명 검색 시 "술집 카테고리" 더해져서 검색</h3>
@@ -148,7 +166,13 @@ const KakaoMap01 = () => {
       <span id="centerAddr"></span>
       <Map id="map" />
       <div>
-        <input type="text" id="searchInput" placeholder="장소를 검색하세요" />
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="장소를 검색하세요"
+          value={keyword} // Use the 'keyword' state as the value
+          onChange={handleInputChange} // Handle input changes
+        />
         <button onClick={handleSearch}>검색</button>
       </div>
     </>
