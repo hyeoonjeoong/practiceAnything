@@ -45,9 +45,9 @@ const KakaoMap01 = () => {
             const updatedCenterRegion = result[0].address_name;
             setCenterRegion(updatedCenterRegion);
 
-            console.log("22222depth: ", updatedCenterRegion);
-            console.log("2depth: ", result[0].region_2depth_name);
-            console.log("3depth: ", result[0].region_3depth_name);
+            console.log("Region: ", updatedCenterRegion);
+            // console.log("2depth: ", result[0].region_2depth_name);
+            // console.log("3depth: ", result[0].region_3depth_name);
             //setMoveKeyword(`${result[0].region_2depth_name}`);
             setMoveKeyword(`${result[0].region_3depth_name}`);
           }
@@ -77,10 +77,76 @@ const KakaoMap01 = () => {
   useEffect(() => {
     // 키워드 값 바뀔때마다 검색
     // handleSearch();
-
-    console.log(moveKeyword);
+    handleMoveSearch();
+    console.log("moveKeyword", moveKeyword);
   }, [moveKeyword]);
 
+  const handleMoveSearch = () => {
+    if (map) {
+      if (moveKeyword) {
+        // 맨 마지막 글자가 "구"나 "동"이면 마지막 한글자를 제외합니다.
+        const lastChar = moveKeyword.charAt(moveKeyword.length - 1);
+        const updatedKeyword =
+          lastChar === "구" || lastChar === "동"
+            ? moveKeyword.slice(0, -1)
+            : moveKeyword;
+
+        const searchCategories2 = [
+          "술집",
+          "호프",
+          "요리주점",
+          "포장마차",
+          "오뎅바",
+          "와인바",
+          "일본식주점",
+          "칵테일바",
+        ];
+
+        const ps = new window.kakao.maps.services.Places(map);
+
+        //사용자 입력 -구, -동 + 카테고리
+        searchCategories2.forEach((category) => {
+          ps.keywordSearch(`${updatedKeyword} ${category}`, placesSearchCB);
+          console.log(`${updatedKeyword} ${category}`);
+        });
+
+        //사용자 입력 + 카테고리
+        searchCategories2.forEach((category) => {
+          ps.keywordSearch(`${moveKeyword} ${category}`, placesSearchCB);
+          console.log(`${moveKeyword} ${category}`);
+        });
+
+        function placesSearchCB(data: any, status: any) {
+          if (status === window.kakao.maps.services.Status.OK) {
+            const bounds = new window.kakao.maps.LatLngBounds();
+            for (let i = 0; i < data.length; i++) {
+              displayMarker(map, data[i], bounds);
+            }
+            map.setBounds(bounds);
+          }
+        }
+
+        function displayMarker(map: any, place: any, bounds: any) {
+          const marker = new window.kakao.maps.Marker({
+            map: map,
+            position: new window.kakao.maps.LatLng(place.y, place.x),
+          });
+
+          window.kakao.maps.event.addListener(marker, "click", function () {
+            const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+            infowindow.setContent(
+              '<div style="padding:5px;font-size:12px;">' +
+                place.place_name +
+                "</div>"
+            );
+            infowindow.open(map, marker);
+          });
+
+          bounds.extend(new window.kakao.maps.LatLng(place.y, place.x));
+        }
+      }
+    }
+  };
   const handleSearch = () => {
     if (map) {
       const keywordInput = document.getElementById(
