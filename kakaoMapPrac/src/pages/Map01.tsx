@@ -18,6 +18,8 @@ const Map01 = () => {
   const [centerRegion, setCenterRegion] = useState<string>("");
   const [keyword, setKeyword] = useState("");
   const [moveKeyword, setMoveKeyword] = useState("");
+  const [markers, setMarkers] = useState<any[]>([]);
+  const [infoWindow, setInfoWindow] = useState<any>(null);
 
   useEffect(() => {
     const initializeMap = () => {
@@ -73,11 +75,6 @@ const Map01 = () => {
 
   const handleMoveSearch = () => {
     if (map && moveKeyword) {
-      const updatedKeyword =
-        moveKeyword.endsWith("구") || moveKeyword.endsWith("동")
-          ? moveKeyword.slice(0, -1)
-          : moveKeyword;
-
       const searchCategories = [
         "술집",
         "호프",
@@ -89,17 +86,12 @@ const Map01 = () => {
         "칵테일바",
       ];
 
-      searchPlacesByCategory(updatedKeyword, searchCategories);
+      searchPlacesByCategory(moveKeyword, searchCategories);
     }
   };
 
   const handleSearch = () => {
     if (map && keyword) {
-      const updatedKeyword =
-        keyword.endsWith("구") || keyword.endsWith("동")
-          ? keyword.slice(0, -1)
-          : keyword;
-
       const searchCategories = [
         "술집",
         "호프",
@@ -111,7 +103,7 @@ const Map01 = () => {
         "칵테일바",
       ];
 
-      searchPlacesByCategory(updatedKeyword, searchCategories);
+      searchPlacesByCategory(keyword, searchCategories);
     }
   };
 
@@ -121,6 +113,11 @@ const Map01 = () => {
   ) => {
     const ps = new window.kakao.maps.services.Places(map);
 
+    removeAllMarkers();
+    removeInfoWindow();
+
+    const bounds = new window.kakao.maps.LatLngBounds();
+
     categories.forEach((category) => {
       const fullKeyword = `${baseKeyword} ${category}`;
       ps.keywordSearch(fullKeyword, placesSearchCB);
@@ -129,27 +126,54 @@ const Map01 = () => {
 
     function placesSearchCB(data: any, status: any) {
       if (status === window.kakao.maps.services.Status.OK) {
-        const bounds = new window.kakao.maps.LatLngBounds();
-        data.forEach((place: any) => displayMarker(map, place, bounds));
+        data.forEach((place: any) => {
+          displayMarker(map, place);
+          bounds.extend(new window.kakao.maps.LatLng(place.y, place.x));
+        });
+
         map.setBounds(bounds);
       }
     }
 
-    function displayMarker(map: any, place: any, bounds: any) {
+    function displayMarker(map: any, place: any) {
       const marker = new window.kakao.maps.Marker({
         map: map,
         position: new window.kakao.maps.LatLng(place.y, place.x),
       });
 
+      setMarkers((prevMarkers) => [...prevMarkers, marker]);
+
       window.kakao.maps.event.addListener(marker, "click", () => {
-        const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+        removeInfoWindow();
+
+        const infowindow = new window.kakao.maps.InfoWindow({
+          zIndex: 1,
+        });
+
+        setInfoWindow(infowindow);
+
         infowindow.setContent(
           `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`
         );
-        infowindow.open(map, marker);
-      });
+        infowindow.setPosition(new window.kakao.maps.LatLng(place.y, place.x));
 
-      bounds.extend(new window.kakao.maps.LatLng(place.y, place.x));
+        infowindow.open(map);
+      });
+    }
+  };
+
+  const removeAllMarkers = () => {
+    markers.forEach((marker: any) => {
+      marker.setMap(null);
+    });
+
+    setMarkers([]);
+  };
+
+  const removeInfoWindow = () => {
+    if (infoWindow) {
+      infoWindow.close();
+      setInfoWindow(null);
     }
   };
 
