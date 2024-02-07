@@ -69,6 +69,8 @@ function App() {
 
 export default App;
 
+//About 요소로 들어왔을 때 Outlet 위치에 하위 페이지 요소들이 보여진다.
+//<Outlet>은 nested routes안의 element들을 어디에 보여줄지 표기하는 곳. 하위 요소들의 위치를 잡아준다고 생각.
 function About() {
   return (
     <div>
@@ -77,3 +79,34 @@ function About() {
     </div>
   );
 }
+
+//---------------------------------------------------------------
+//⭐️ public 폴더에 있는 이미지 사용 시
+
+// (1)그냥 이미지 경로 사용
+// public 폴더에 넣으면 import 안해도 된다.
+// css 파일에서도 /이미지경로 사용
+// <img src="/logo192.png" />
+
+//(2)env 경로 사용 (권장)
+//<img src={process.env.PUBLIC_URL + '/logo192.png'} />
+//배포 시 다른 경로에 배포하게 되면 파일을 찾을 수 없다고 나올 수 있다.
+
+//---------------------------------------------------------------
+//⭐️ css 파일에서 src 폴더안에 있는 사진 사용 시 : 그냥 이미지 경로 사용
+// .main-bg {
+//   height : 300px;
+//   background-image : url('./bg.png');
+//   background-size : cover;
+//   background-position : center;
+// }
+
+//---------------------------------------------------------------
+//⭐️ html 파일에서 src 폴더안에 있는 사진 사용 시 : 이미지 import 해와야 한다.
+
+//---(1) url로 작성
+// import bg from './bg.png'
+//<div className="main-bg" style={{ backgroundImage : 'url(' + bg + ')' }}></div>
+
+//---(2) <img>태그 사용
+//<img src={bg}/>

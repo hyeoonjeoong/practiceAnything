@@ -3,6 +3,8 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 function ProductDetail(props) {
+  //useParams()를 사용하면 현재 /:url파라미터 자리에 유저가 입력한 값을 가져올 수 있다.
+
   const { products } = props;
   let { id } = useParams();
 
