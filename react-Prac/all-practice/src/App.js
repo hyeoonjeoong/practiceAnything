@@ -5,6 +5,7 @@ import CheckBox2 from "./components/CheckBox2";
 import Bank from "./components/Bank";
 import Barchart from "./components/Graph";
 import CommentList from "./firstMetReact/CommentList";
+import ReactHookForm from "./components/ReactHookForm";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
       <Barchart /> */}
       <h3 style={{ backgroundColor: "bisque" }}>CommentList Practice</h3>
       <CommentList />
+      <h3 style={{ backgroundColor: "bisque" }}>React hook form Practice</h3>
+      <ReactHookForm />
     </>
   );
 }
