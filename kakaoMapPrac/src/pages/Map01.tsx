@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const Map = styled.div`
+const MapContainer = styled.div`
   width: 80%;
   height: 700px;
   margin: 20px;
@@ -29,33 +29,31 @@ const Map01 = () => {
           37.53005069999996,
           126.96089345393857
         ),
-        level: 3,
+        level: 2,
       };
 
       const newMap = new window.kakao.maps.Map(mapContainer, options);
       setMap(newMap);
 
-      const ps = new window.kakao.maps.services.Places(newMap);
+      const ps = new window.kakao.maps.services.Places();
 
       const displayCenterInfo = (result: any, status: any) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          const infoDiv = document.getElementById("centerAddr");
-          if (infoDiv) {
-            infoDiv.innerHTML = result[0].address_name;
-
-            const updatedCenterRegion = result[0].address_name;
-            setCenterRegion(updatedCenterRegion);
-
-            console.log("Region: ", updatedCenterRegion);
-            setMoveKeyword(`${result[0].region_3depth_name}`);
-          }
+          const updatedCenterRegion = result[0].address_name;
+          setCenterRegion(updatedCenterRegion);
+          console.log("Region: ", updatedCenterRegion);
+          setMoveKeyword(`${result[0].region_3depth_name}`);
         }
       };
 
       const geocoder = new window.kakao.maps.services.Geocoder();
 
       const searchAddrFromCoords = (coords: any, callback: any) => {
-        geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+        geocoder.coord2RegionCode(
+          coords.getLng(),
+          coords.getLat(),
+          displayCenterInfo
+        );
       };
 
       searchAddrFromCoords(newMap.getCenter(), displayCenterInfo);
@@ -111,7 +109,7 @@ const Map01 = () => {
     baseKeyword: string,
     categories: string[]
   ) => {
-    const ps = new window.kakao.maps.services.Places(map);
+    const ps = new window.kakao.maps.services.Places();
 
     removeAllMarkers();
     removeInfoWindow();
@@ -184,8 +182,8 @@ const Map01 = () => {
   return (
     <>
       <span>지도중심기준 행정동 주소정보: </span>
-      <span id="centerAddr"></span>
-      <Map id="map" />
+      <span id="centerAddr">{centerRegion}</span>
+      <MapContainer id="map" />
       <div>
         <input
           type="text"
