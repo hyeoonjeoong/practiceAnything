@@ -1,36 +1,37 @@
 import React, { ChangeEvent } from "react";
 import styled from "styled-components";
+import CheckboxContext from "./CheckboxContext";
 
 interface CheckboxProps {
-  onChange: () => void;
+  onChange?: () => void;
   children: React.ReactNode;
   id: string;
   value: string;
-  isChecked: boolean;
-  //   onChange: (isChecked: boolean) => void;
+  checked?: any;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   children,
-  id,
   value,
+  checked,
   onChange,
-  isChecked,
+  id,
 }: CheckboxProps) => {
-  //   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     const isChecked = event.target.checked;
-  //     onChange(isChecked);
-  //   };
+  const context = React.useContext(CheckboxContext);
+  const { isChecked, toggleValue } = context;
+
   return (
     <>
       <StyledCheckBox>
         <input
           type="checkbox"
           id={id}
-          name="alcoholWrap"
+          //name="alcoholWrap"
           value={value}
-          onChange={onChange}
-          checked={isChecked}
+          checked={isChecked(value)}
+          onChange={({ target: { checked } }) =>
+            toggleValue({ checked, value })
+          }
         />
         <label htmlFor={id}>{children}</label>
       </StyledCheckBox>

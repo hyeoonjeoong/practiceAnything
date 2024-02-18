@@ -1,6 +1,5 @@
-// import React from "react";
-// import { createContext } from "react";
+import { createContext } from "react";
 
-// const CheckboxContext = createContext();
+const CheckboxContext = createContext<any | null>(null);
 
-// export default CheckboxContext;
+export default CheckboxContext;
