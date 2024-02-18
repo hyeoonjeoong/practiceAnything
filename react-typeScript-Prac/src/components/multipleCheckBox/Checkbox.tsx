@@ -26,7 +26,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
         <input
           type="checkbox"
           id={id}
-          //name="alcoholWrap"
           value={value}
           checked={isChecked(value)}
           onChange={({ target: { checked } }) =>

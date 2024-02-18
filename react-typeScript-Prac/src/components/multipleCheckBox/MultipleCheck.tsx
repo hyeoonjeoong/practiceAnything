@@ -7,6 +7,8 @@ const MultipleCheck = () => {
   const [alcohol, setAlcohol] = useState<any>(["alcohol_default"]);
   const [music, setMusic] = useState<any>(["music_default"]);
   const [mood, setMood] = useState<any>(["mood_default"]);
+  const [etc, setEtc] = useState<any>([]);
+  const [snack, setSnack] = useState<any>([]);
 
   const handleAlcoholChange = (values: string[]) => {
     setAlcohol(values);
@@ -19,6 +21,14 @@ const MultipleCheck = () => {
   const handleMoodChange = (values: string[]) => {
     setMood(values);
     console.log({ 분위기: values });
+  };
+  const handleEtcChange = (values: string[]) => {
+    setEtc(values);
+    console.log({ 기타: values });
+  };
+  const handleSnackChange = (values: string[]) => {
+    setSnack(values);
+    console.log({ 맛: values });
   };
   return (
     <>
@@ -113,6 +123,22 @@ const MultipleCheck = () => {
         </Checkbox>
         <Checkbox id="mood_6" value="mood_6">
           힙한
+        </Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup label="기타 선택" values={etc} onChange={handleEtcChange}>
+        <Checkbox id="etc_1" value="etc_1">
+          주차장 있어요
+        </Checkbox>
+        <Checkbox id="etc_2" value="etc_2">
+          화장실 안에 있어요
+        </Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup label="맛" values={snack} onChange={handleSnackChange}>
+        <Checkbox id="snack_1" value="snack_1">
+          안주 맛집 인정
+        </Checkbox>
+        <Checkbox id="snack_2" value="snack_2">
+          평범해요
         </Checkbox>
       </CheckboxGroup>
     </>
