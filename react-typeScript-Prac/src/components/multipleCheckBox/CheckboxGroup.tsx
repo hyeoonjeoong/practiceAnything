@@ -1,5 +1,6 @@
 import React from "react";
 import CheckboxContext from "./CheckboxContext";
+import styled from "styled-components";
 
 interface CheckboxGroupProps {
   label: string;
@@ -31,7 +32,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   return (
     <>
       <fieldset>
-        <legend>{label}</legend>
+        <StyledLegend>{label}</StyledLegend>
         <CheckboxContext.Provider value={{ isChecked, toggleValue }}>
           {children}
         </CheckboxContext.Provider>
@@ -47,3 +48,9 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 };
 
 export default CheckboxGroup;
+
+const StyledLegend = styled.legend`
+  font-size: 18px;
+  color: #4d607b;
+  margin: 7px 0px;
+`;
