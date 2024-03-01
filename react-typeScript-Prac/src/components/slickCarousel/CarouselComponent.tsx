@@ -45,3 +45,15 @@ const Box = styled.div`
   height: 200px;
   /* background-color: red; */
 `;
+
+//커스텀 스타일 적용 시
+// const CustomSlider = styled(Slider)`
+//   position: relative;
+//   display: inline-block;
+//   width: 430px;
+//   height: 200px;
+//   align-items: center;
+//   justify-content: center;
+//   margin: 5px;
+//   padding: 5px 20px;
+// `;
