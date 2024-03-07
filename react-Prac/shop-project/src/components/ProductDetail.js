@@ -30,12 +30,13 @@ function ProductDetail(props) {
   //useParams()를 사용하면 현재 /:url파라미터 자리에 유저가 입력한 값을 가져올 수 있다.
   let { id } = useParams();
 
-  //✅언제 쓰면 좋은 가?
+  //✅ useEffect 언제 쓰면 좋은 가?
   //useEffect 안에 있는 코드는 html렌더링 후에 동작한다!
   //만약 복잡한 연산을 해줘야 한다면?
   //html을 먼저 보여주고 복잡한 연산을 한다. 효율적으로 동작하게 되는 셈.
   //서버에서 데이터 가져올 때에도 주로 사용한다. (html보여주는 것에 비해 덜 중요한.)
   //타이머 장착하거나.
+  //--- 뒤에 붙은 []는 의존성배열. 조건과 같다. 해당 변수가 달라질 때 마다 useEffect내부의 코드를 실행해준다.
 
   useEffect(() => {
     console.log("hi, useEffect");
@@ -45,6 +46,34 @@ function ProductDetail(props) {
       setAlert(false);
     }, 2000);
   }, []);
+
+  //✅ useEffect 의 clean up function
+  //내부에 return문을 넣을 수 있다. 얘는 useEffect 동작 전에 실행된다. (별멍: clean up function)
+  //얘는 mount시에는 실행 안된다. unmount 시 실행된다!!
+  useEffect(() => {
+    let a = setTimeout(() => {
+      setAlert(false);
+    }, 2000);
+
+    return () => {
+      //리액트 특성 상 재렌더링이 잦아진다. 의도치 않게 타이머가 여러개 생성 될 수 도 있다.
+      //그래서 기존 타이머는 제거하는 코드를 작성해준다. (주로 타이머 사용 시 이러케 한다. 쓸데없는 비효율 방지 위해!)
+      //타이머를 변수에 넣어서 사용한다.
+      clearTimeout(a); //타이머 제거해주는 함수.
+
+      //서버로 데이터 요청 할 때에 ~ 그 사이에 재렌더링 된다면? 그럼 요청이 끝나기 전에 요청이 가고 ~~ 오류 날 수 있다.
+      //그럴 때 이런식으로 clean up function 사용해주면 된다.
+    };
+  }, []);
+
+  //✅
+  //useEffect(()=>{}) 재렌더링마다 코드 실행
+  //useEffect(()=>{},[]) mount 시 1회 코드 실행
+  //useEffect(()=>{
+  // return()={
+  //   //unmount 시 1회 코드 실행
+  // }
+  // },[])
 
   const findProduct = products.find((product) => product.id == id);
   console.log(findProduct);
