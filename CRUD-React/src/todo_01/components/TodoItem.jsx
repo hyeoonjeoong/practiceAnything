@@ -12,7 +12,10 @@ const TodoItem = (props) => {
   }, [onEdit]);
 
   const handleDel = () => {
-    props.onDelete(props.item.id);
+    const isDel = window.confirm("정말 삭제하시겠습니까?");
+    if (isDel) {
+      props.onDelete(props.item.id);
+    }
   };
 
   const handleChange = (e) => {
