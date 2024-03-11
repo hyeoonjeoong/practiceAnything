@@ -6,7 +6,7 @@ const TodoBoard = (props) => {
     <>
       <h1>🐼 Todo List</h1>
       {props.todoList.map((item) => (
-        <TodoItem item={item} />
+        <TodoItem key={item.id} item={item} onDelete={props.onDelete} />
       ))}
     </>
   );
