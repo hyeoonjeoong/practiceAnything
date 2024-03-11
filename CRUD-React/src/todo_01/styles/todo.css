@@ -1,21 +1,25 @@
 .todo-item {
   width: 300px;
-  height: 50px;
+  height: 30px;
   border: 1px solid rgb(172, 172, 215);
   display: flex;
   position: relative;
   justify-content: space-between;
   align-items: center;
   padding: 0px 5px;
-  margin: 5px 0px;
+  margin: 5px 7px;
 }
 
 .todo-btn {
   background-color: rgb(172, 172, 215);
   border: none;
   height: 30px;
-  margin: 0px 5px;
+  margin: 0px 4px;
   color: whitesmoke;
+  cursor: pointer;
+}
+.todo-btn:hover {
+  background-color: rgb(126, 126, 199);
 }
 
 .todo-input {
@@ -23,6 +27,13 @@
   border-bottom: 1px solid rgb(172, 172, 215);
   width: 257px;
   margin-bottom: 30px;
+}
+.todo-inputEdit {
+  border: none;
+  width: 257px;
+  outline: none;
+  color: rgb(178, 178, 213);
+  font-size: medium;
 }
 
 .todo-input::placeholder {
@@ -36,6 +47,13 @@
 .todo-layout {
   display: flex;
   flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-item-layout {
+  display: flex;
   position: relative;
   align-items: center;
   justify-content: center;

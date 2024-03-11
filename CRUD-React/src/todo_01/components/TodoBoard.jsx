@@ -5,7 +5,12 @@ const TodoBoard = (props) => {
   return (
     <>
       {props.todoList.map((item) => (
-        <TodoItem key={item.id} item={item} onDelete={props.onDelete} />
+        <TodoItem
+          key={item.id}
+          item={item}
+          onDelete={props.onDelete}
+          onEdit={props.onEdit}
+        />
       ))}
     </>
   );

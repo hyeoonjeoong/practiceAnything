@@ -14,8 +14,6 @@ const TodoList01 = () => {
     setTodoList([...todoList, newItem]);
     setInputValue("");
     setTodoId(todoId + 1);
-
-    //console.log("addItem todoList: ", todoList);
   };
 
   const handleOnKeyPress = (e) => {
@@ -26,6 +24,13 @@ const TodoList01 = () => {
 
   const handleDeleteItem = (itemId) => {
     const updateList = todoList.filter((item) => item.id !== itemId);
+    setTodoList(updateList);
+  };
+
+  const handleEditItem = (itemId, editList) => {
+    const updateList = todoList.map((item) =>
+      item.id === itemId ? { ...item, text: editList } : item
+    );
     setTodoList(updateList);
   };
 
@@ -46,7 +51,11 @@ const TodoList01 = () => {
             추가
           </button>
         </div>
-        <TodoBoard todoList={todoList} onDelete={handleDeleteItem} />
+        <TodoBoard
+          todoList={todoList}
+          onDelete={handleDeleteItem}
+          onEdit={handleEditItem}
+        />
       </div>
     </>
   );
