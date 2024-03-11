@@ -14,7 +14,8 @@ const TodoList01 = () => {
     setTodoList([...todoList, newItem]);
     setInputValue("");
     setTodoId(todoId + 1);
-    console.log(todoList);
+
+    //console.log("addItem todoList: ", todoList);
   };
 
   const handleOnKeyPress = (e) => {
@@ -27,6 +28,7 @@ const TodoList01 = () => {
     const updateList = todoList.filter((item) => item.id !== itemId);
     setTodoList(updateList);
   };
+
   return (
     <>
       <div className="todo-layout">
