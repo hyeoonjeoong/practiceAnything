@@ -7,9 +7,9 @@ const TodoItem = (props) => {
   };
   return (
     <>
-      <div className="todo-item">
+      <div className="todo-item todo-text">
         {props.item.text}
-        <button onClick={handleDel} className="todo-del">
+        <button onClick={handleDel} className="todo-btn">
           삭제
         </button>
       </div>

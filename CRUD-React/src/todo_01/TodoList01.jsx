@@ -29,14 +29,23 @@ const TodoList01 = () => {
   };
   return (
     <>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleOnKeyPress}
-      />
-      <button onClick={addItem}>추가</button>
-      <TodoBoard todoList={todoList} onDelete={handleDeleteItem} />
+      <div className="todo-layout">
+        <h2 className="todo-text">🐼 Todo List</h2>
+        <div>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleOnKeyPress}
+            className="todo-input"
+            placeholder="할 일을 입력해주세요 ! "
+          />
+          <button onClick={addItem} className="todo-btn">
+            추가
+          </button>
+        </div>
+        <TodoBoard todoList={todoList} onDelete={handleDeleteItem} />
+      </div>
     </>
   );
 };
