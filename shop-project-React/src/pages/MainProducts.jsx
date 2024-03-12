@@ -1,9 +1,22 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import axios from "axios";
 
 import Card from "../components/Card.js";
 
 function MainProducts(props) {
   const { products } = props;
+
+  const handleBtn = () => {
+    console.log("hi");
+    axios
+      .get("https://codingapple1.github.io/shop/data2.json")
+      .then((data) => {
+        console.log(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -17,6 +30,7 @@ function MainProducts(props) {
                 title={product.title}
                 content={product.content}
               />
+              <Button onClick={handleBtn}>버튼</Button>
             </Col>
           ))}
         </Row>
