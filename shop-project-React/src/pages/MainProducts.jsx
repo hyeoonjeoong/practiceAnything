@@ -9,7 +9,7 @@ function MainProducts(props) {
   const handleBtn = () => {
     console.log("hi");
     axios
-      .get("https://codingapple1.github.io/shop/data2.json")
+      .get("/json/productInfo.json")
       .then((data) => {
         console.log(data.data);
       })
