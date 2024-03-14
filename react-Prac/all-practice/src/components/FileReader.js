@@ -5,59 +5,39 @@ import styled from "styled-components";
 //인코딩 된 문자열을 useState로 관리할 수 있다.
 //이를 통해 사용자가 업로드한 파일의 미리보기가 가능해진다!
 
-//FileReader 는 File, Blob객체를 핸들링하는데 사용한다.
-//기본적으로 이벤트 형식이니 이벤트 리스너를 사용해 줄 수 있다!
-
-//--FileReader.readAsDataURL()
-//File, Blob을 읽어와 base64로 인코딩 한 문자열을 FileReader 인스턴스의 result라는 속성에 담아준다.
-
-//--FileReader.onload
-//FileReader가 성공적으로 파일을 읽어들였을 때 트리거 되는 이벤트 핸들러이다.
-//이 핸들러 내부에 우리가 원하는 이미지 프리뷰 로직을 넣어주면 된다.
-
-//도움 받은 링크: https://nukw0n-dev.tistory.com/30#FileReader-onload [찐이의 개발 연결구과:티스토리]
-
-//https://velog.io/@hye_rin/React-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B3%A0-%EB%AF%B8%EB%A6%AC%EB%B3%B4%EA%B8%B0
-
 const FileReader = () => {
-  const [uploadFile, setUploadFile] = useState("");
-
-  const [imgFile, setImgFile] = useState("");
+  const [uploadImgFile, setUploadImgFile] = useState("");
   const imgRef = useRef();
 
-  //   const handleFileUpload = (e) => {
-  //     fileEncode(e.target.files[0]);
-
-  //     console.log(e.target.files[0]); //업로드 한 파일에 대한 정보 확인 가능
-  //   };
-
-  const fileEncode = (fileBlob) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    console.log(reader);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setUploadFile(reader.result);
-        resolve();
-      };
-    });
-  };
-
   const saveImgFile = () => {
+    // 입력된 파일을 가져온다.
     const file = imgRef.current.files[0];
+
+    console.log(file); //업로드한 파일의 정보가 보여진다!
+
+    //파일 데이터를 읽어올 수 있도록 FileReader 생성자 만들기.
     const reader = new window.FileReader();
+
+    //readAsDataURL - File, Blob을 읽어와 base64로 인코딩 한 문자열을 FileReader 인스턴스의 result라는 속성에 담아준다.
+    //간단히 File, Blob 객체를 읽어 Data URL 형태로 바꿔준다!
     reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
+
+    //onload - 파일을 성공적으로 읽었을 때 실행.
+    reader.onload = () => {
+      //파일이 읽어졌다면 result 속성에 담기게 된다.
+      setUploadImgFile(reader.result);
     };
   };
 
   return (
     <>
       <li>FileReader Web API 사용해보기</li>
-      <input type="file" onChange={saveImgFile} ref={imgRef} />
+      {/* accept 은 input type="file" 일 때만 사용 할 수 있다. 
+       accept="image/*" 은 이미지 확장자 전체를 허용하겠다는 것!
+       특정 확장자만 받고 싶다면 accept=".png, .jpg" 이런식으로 사용 가능! */}
+      <input type="file" onChange={saveImgFile} ref={imgRef} accept="image/*" />
       <PreviewBox>
-        {imgFile && <img src={imgFile} alt="이미지 미리보기" />}
+        {uploadImgFile && <img src={uploadImgFile} alt="이미지 미리보기" />}
       </PreviewBox>
     </>
   );
@@ -68,6 +48,14 @@ export default FileReader;
 const PreviewBox = styled.div`
   width: 300px;
   height: 300px;
-  object-fit: cover;
   background-color: wheat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
 `;
