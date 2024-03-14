@@ -6,27 +6,28 @@ import Bank from "./components/Bank";
 import Barchart from "./components/Graph";
 import CommentList from "./firstMetReact/CommentList";
 import ReactHookForm from "./components/ReactHookForm";
+import FileReader from "./components/FileReader";
 
 function App() {
   //이렇게 하면 로그인 토큰 저장
-  const login = async () => {
-    const res = await axios.post("/auth/signIn");
-    localStorage.setItem("accessToken", res.data.token);
-  };
+  // const login = async () => {
+  //   const res = await axios.post("/auth/signIn");
+  //   localStorage.setItem("accessToken", res.data.token);
+  // };
 
-  //이건 로그아웃 할 떄는 삭제하고
-  const logout = async () => {
-    localStorage.removeItem("accessToken");
-  };
+  // //이건 로그아웃 할 떄는 삭제하고
+  // const logout = async () => {
+  //   localStorage.removeItem("accessToken");
+  // };
 
-  //로그인 요청 보낼때는? (로그인 권한을 필요로 하는)
-  const getData = async () => {
-    const res = await axios.get("/todo", {
-      headers: {
-        Authorization: `Barer ${localStorage.getItem("accessToken")}`,
-      },
-    });
-  };
+  // //로그인 요청 보낼때는? (로그인 권한을 필요로 하는)
+  // const getData = async () => {
+  //   const res = await axios.get("/todo", {
+  //     headers: {
+  //       Authorization: `Barer ${localStorage.getItem("accessToken")}`,
+  //     },
+  //   });
+  // };
 
   return (
     <>
@@ -44,6 +45,8 @@ function App() {
       <CommentList />
       <h3 style={{ backgroundColor: "bisque" }}>React hook form Practice</h3>
       <ReactHookForm />
+      <h3 style={{ backgroundColor: "bisque" }}>FileReader</h3>
+      <FileReader />
     </>
   );
 }
