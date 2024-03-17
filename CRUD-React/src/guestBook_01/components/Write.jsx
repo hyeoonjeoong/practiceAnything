@@ -24,29 +24,41 @@ const Write = ({ writtenData }) => {
   };
   return (
     <>
-      <form>
-        <label htmlFor="writer">작성자</label>
-        <input
-          type="text"
-          id="writer"
-          name="writer"
-          onChange={handleChange}
-          value={formData.writer}
-        ></input>
-        <br />
-        <label htmlFor="inputText"> 내용</label>
-        <input
-          type="text"
-          id="inputText"
-          onChange={handleChange}
-          name="inputText"
-          placeholder="방명록을 작성해주세요."
-          value={formData.inputText}
-        ></input>
-        <button type="submit" onClick={handleSubmit}>
-          작성하기
-        </button>
-      </form>
+      <div className="write-layout">
+        <form className="write-form">
+          <div>
+            <label htmlFor="writer" className="write-font">
+              이름
+            </label>
+            <input
+              type="text"
+              id="writer"
+              name="writer"
+              onChange={handleChange}
+              value={formData.writer}
+              className="writer-input"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="inputText" className="write-font">
+              {" "}
+              내용
+            </label>
+            <input
+              type="text"
+              id="inputText"
+              onChange={handleChange}
+              name="inputText"
+              placeholder="방명록을 작성해주세요."
+              value={formData.inputText}
+              className="text-input"
+            ></input>
+          </div>
+          <button type="submit" onClick={handleSubmit} className="btn-add">
+            등록하기
+          </button>
+        </form>
+      </div>
     </>
   );
 };

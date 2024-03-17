@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "./todo_01/styles/todo.css";
 import TodoList01 from "./todo_01/TodoList01";
 
+import "./guestBook_01/styles/guestBook.scss";
 import GuestBook01 from "./guestBook_01/GuestBook01";
 
 function App() {

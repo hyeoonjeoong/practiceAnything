@@ -1,0 +1,68 @@
+$theme-color: (
+  "basic": #607274,
+  "light": #f7f4f2,
+  "grey": #959799,
+);
+
+@mixin basicLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.write-layout {
+  @include basicLayout;
+}
+
+.write-form {
+  @include basicLayout;
+  width: 80%;
+  height: 150px;
+  background-color: map-get($theme-color, "light");
+}
+
+.write-font {
+  color: map-get($theme-color, "basic");
+}
+
+@mixin basicInput {
+  border: none;
+  border-bottom: 1px solid map-get($theme-color, "basic");
+  margin: 13px 5px;
+  background-color: transparent;
+  color: map-get($theme-color, "basic");
+  &::placeholder {
+    text-align: center;
+    color: map-get($theme-color, "grey");
+  }
+  &:focus {
+    outline: none;
+  }
+}
+.writer-input {
+  @include basicInput;
+  width: 130px;
+}
+.text-input {
+  @include basicInput;
+  width: 250px;
+}
+
+@mixin buttons {
+  border-radius: 7px;
+  background-color: map-get($theme-color, "basic");
+  color: map-get($theme-color, "light");
+  border: none;
+  height: 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: #77898b;
+    color: map-get($theme-color, "light");
+  }
+}
+
+.btn-add {
+  @include buttons;
+  width: 80px;
+}
