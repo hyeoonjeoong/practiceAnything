@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Write = () => {
+const Write = ({ writtenData }) => {
   const [formData, setFormData] = useState({
     writer: "",
     inputText: "",
@@ -16,7 +16,11 @@ const Write = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    writtenData(formData);
+    setFormData({
+      writer: "",
+      inputText: "",
+    });
   };
   return (
     <>
@@ -27,7 +31,9 @@ const Write = () => {
           id="writer"
           name="writer"
           onChange={handleChange}
+          value={formData.writer}
         ></input>
+        <br />
         <label htmlFor="inputText"> 내용</label>
         <input
           type="text"
@@ -35,6 +41,7 @@ const Write = () => {
           onChange={handleChange}
           name="inputText"
           placeholder="방명록을 작성해주세요."
+          value={formData.inputText}
         ></input>
         <button type="submit" onClick={handleSubmit}>
           작성하기
