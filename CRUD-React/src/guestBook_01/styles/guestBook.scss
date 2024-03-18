@@ -10,20 +10,24 @@ $theme-color: (
   justify-content: center;
   align-items: center;
 }
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
 
-.write-layout {
-  @include basicLayout;
+  align-items: center;
+  width: 90vw;
+  height: 90vh;
+  background-color: map-get($theme-color, "light");
 }
 
 .write-form {
   @include basicLayout;
-  width: 80%;
   height: 150px;
-  background-color: map-get($theme-color, "light");
 }
 
 .write-font {
   color: map-get($theme-color, "basic");
+  font-size: 0.9em;
 }
 
 @mixin basicInput {
@@ -50,6 +54,7 @@ $theme-color: (
 }
 
 @mixin buttons {
+  font-size: 0.8em;
   border-radius: 7px;
   background-color: map-get($theme-color, "basic");
   color: map-get($theme-color, "light");
@@ -65,4 +70,41 @@ $theme-color: (
 .btn-add {
   @include buttons;
   width: 80px;
+}
+
+table {
+  border: 1px #77898b solid;
+  font-size: 0.9em;
+  box-shadow: 0 2px 5px rgba(187, 187, 187, 0.25);
+  width: 90%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  color: map-get($theme-color, "basic");
+  margin: 20px 5px;
+}
+
+thead {
+  color: map-get($theme-color, "light");
+  background: #77898b;
+}
+
+td,
+th {
+  padding: 1em;
+  vertical-align: middle;
+}
+
+td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.table-writer {
+  width: 100px;
+  border-right: 1px solid #c8cecf;
+}
+.table-content {
+  width: 400px;
 }

@@ -8,14 +8,16 @@ const GuestTable = ({ content }) => {
   return (
     <>
       <table>
-        <th>
-          <td>작성자</td>
-          <td>내용</td>
-        </th>
+        <thead>
+          <tr>
+            <th className="table-writer">작성자</th>
+            <th className="table-content">내용</th>
+          </tr>
+        </thead>
         {content.map((data) => (
           <>
             <tr key={data.id}>
-              <td>{data.writer}</td>
+              <td className="table-writer">{data.writer}</td>
               <td>{data.inputText}</td>
             </tr>
           </>

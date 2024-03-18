@@ -24,9 +24,11 @@ const GuestBook01 = () => {
 
   return (
     <>
-      <Write writtenData={writtenData} />
-      <GuestTable content={content} />
-      <SearchResult />
+      <div className="pageWrapper">
+        <Write writtenData={writtenData} />
+        <GuestTable content={content} />
+        <SearchResult />
+      </div>
     </>
   );
 };
