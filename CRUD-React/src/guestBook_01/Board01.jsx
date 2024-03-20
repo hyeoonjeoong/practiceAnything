@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 //기존 꺼 컴포넌트 분리, 테일윈드 적용해보기, 리액트 초반에 작성한 코드 리팩토링 해보기
+//게시판 스타일 적용
+
 const Board01 = () => {
   const [list, setList] = useState([]);
   const [listId, SetListId] = useState(0);
