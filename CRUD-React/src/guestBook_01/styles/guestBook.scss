@@ -121,8 +121,13 @@ td {
 .table-content {
   width: 400px;
 }
+.table-contentBox {
+  display: flex;
+  justify-content: space-evenly;
+}
 
 .table-btnBox {
-  left: 300px;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
 }

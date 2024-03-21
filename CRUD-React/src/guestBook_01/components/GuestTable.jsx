@@ -46,7 +46,7 @@ const GuestTable = ({ content }) => {
           <>
             <tr key={data.id}>
               <td className="table-writer">{data.writer}</td>
-              <td>
+              <td className="table-contentBox">
                 {isAbleEdit ? (
                   <>
                     <input type="text" placeholder="수정 할 내용 입력"></input>
@@ -54,12 +54,12 @@ const GuestTable = ({ content }) => {
                 ) : (
                   <>{data.inputText}</>
                 )}
-                <span className="table-btnBox">
+                <div className="table-btnBox">
                   <button className="btn-edit" onClick={() => handleEdit(data)}>
                     수정
                   </button>
                   <button className="btn-del">삭제</button>
-                </span>
+                </div>
               </td>
             </tr>
           </>
