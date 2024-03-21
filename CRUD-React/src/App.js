@@ -17,8 +17,8 @@ function App() {
       <Title>Guest Book 01</Title>
       <GuestBook01 />
       {/* ------------------------------------- */}
-      <Title>Board 01</Title>
-      <Board01 />
+      {/* <Title>Board 01</Title>
+      <Board01 /> */}
     </>
   );
 }

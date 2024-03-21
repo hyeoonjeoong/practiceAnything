@@ -4,6 +4,7 @@ const Write = ({ writtenData }) => {
   const [formData, setFormData] = useState({
     writer: "",
     inputText: "",
+    pw: "",
   });
 
   const handleChange = (e) => {
@@ -20,6 +21,7 @@ const Write = ({ writtenData }) => {
     setFormData({
       writer: "",
       inputText: "",
+      pw: "",
     });
   };
   return (
@@ -35,6 +37,17 @@ const Write = ({ writtenData }) => {
             name="writer"
             onChange={handleChange}
             value={formData.writer}
+            className="writer-input"
+          ></input>
+          <label htmlFor="pw" className="write-font">
+            비밀번호
+          </label>
+          <input
+            type="password"
+            id="pw"
+            name="pw"
+            onChange={handleChange}
+            value={formData.pw}
             className="writer-input"
           ></input>
         </div>

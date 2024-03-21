@@ -33,7 +33,7 @@ $theme-color: (
 @mixin basicInput {
   border: none;
   border-bottom: 1px solid map-get($theme-color, "basic");
-  margin: 13px 5px;
+  margin: 13px 25px 13px 5px;
   background-color: transparent;
   color: map-get($theme-color, "basic");
   &::placeholder {
@@ -50,7 +50,7 @@ $theme-color: (
 }
 .text-input {
   @include basicInput;
-  width: 250px;
+  width: 345px;
 }
 
 @mixin buttons {

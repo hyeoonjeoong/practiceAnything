@@ -13,6 +13,7 @@ const GuestBook01 = () => {
       id: listId,
       writer: data.writer,
       inputText: data.inputText,
+      pw: data.pw,
     };
     setContent([...content, newContent]);
     setListId(listId + 1);
