@@ -17,6 +17,10 @@ const Write = ({ writtenData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.writer || !formData.inputText || !formData.pw) {
+      alert("작성되지 않은 내용이 있습니다.");
+      return;
+    }
     writtenData(formData);
     setFormData({
       writer: "",

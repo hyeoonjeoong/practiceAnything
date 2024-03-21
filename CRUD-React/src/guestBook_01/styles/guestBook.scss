@@ -72,6 +72,19 @@ $theme-color: (
   width: 80px;
 }
 
+.btn-edit {
+  @include buttons;
+  background-color: #a7bbbc;
+  margin: 0px 3px;
+  width: 40px;
+}
+.btn-del {
+  @include buttons;
+  background-color: #a7bbbc;
+  margin: 0px 3px;
+  width: 40px;
+}
+
 table {
   border: 1px #77898b solid;
   font-size: 0.9em;
@@ -107,4 +120,9 @@ td {
 }
 .table-content {
   width: 400px;
+}
+
+.table-btnBox {
+  left: 300px;
+  position: relative;
 }
