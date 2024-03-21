@@ -1,20 +1,37 @@
 import React, { useEffect, useState } from "react";
 
 const GuestTable = ({ content }) => {
-  const [checkPw, setCheckPw] = useState(false);
+  const [isCheckPw, setIsCheckPw] = useState(false);
+  const [isAbleEdit, setIsAbleEdit] = useState(false);
+
+  const [inputPw, setInputPw] = useState("");
+  const [clickedData, setClickedData] = useState({});
   useEffect(() => {
     console.log(content);
   }, []);
 
   const handleEdit = (data) => {
-    setCheckPw(true);
-    console.log(data.id);
+    setIsCheckPw(true);
+    // console.log(data);
+    setClickedData(data);
   };
 
-  const handleInputPw = (e, data) => {
-    console.log("hi");
-    console.log(e);
-    console.log(data);
+  const handlePwChange = (e) => {
+    setInputPw(e.target.value);
+    // console.log(e.target.value);
+  };
+  const handleConfirmPw = () => {
+    console.log("clickedData", clickedData);
+    console.log("inputPw", inputPw);
+    if (clickedData.pw === inputPw) {
+      console.log("비밀번호 일치");
+      setIsAbleEdit(true);
+      setIsCheckPw(false);
+    } else {
+      console.log("불일치. 수정 삭제 불가");
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
   };
   return (
     <>
@@ -30,7 +47,13 @@ const GuestTable = ({ content }) => {
             <tr key={data.id}>
               <td className="table-writer">{data.writer}</td>
               <td>
-                {data.inputText}
+                {isAbleEdit ? (
+                  <>
+                    <input type="text" placeholder="수정 할 내용 입력"></input>
+                  </>
+                ) : (
+                  <>{data.inputText}</>
+                )}
                 <span className="table-btnBox">
                   <button className="btn-edit" onClick={() => handleEdit(data)}>
                     수정
@@ -42,15 +65,17 @@ const GuestTable = ({ content }) => {
           </>
         ))}
       </table>
-      {checkPw && (
+      {isCheckPw && (
         <>
           <div>
             <input
               type="password"
               className="writer-input"
               placeholder="비밀번호를 입력해주세요."
+              value={inputPw}
+              onChange={handlePwChange}
             ></input>
-            <button onClick={handleInputPw}>확인</button>
+            <button onClick={handleConfirmPw}>확인</button>
           </div>
         </>
       )}
