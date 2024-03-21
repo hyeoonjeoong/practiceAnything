@@ -5,6 +5,8 @@ const GuestTable = ({ content }) => {
   const [isAbleEdit, setIsAbleEdit] = useState(false);
 
   const [inputPw, setInputPw] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+  const [newContent, setNewContent] = useState("");
   const [clickedData, setClickedData] = useState({});
   useEffect(() => {
     console.log(content);
@@ -33,6 +35,29 @@ const GuestTable = ({ content }) => {
       return;
     }
   };
+
+  const handleEditOk = () => {
+    console.log("수정완료버튼 클릭");
+    const updatedContent = content.map((data) => {
+      if (data.id === clickedData.id) {
+        return {
+          ...data,
+          inputText: editedContent, // 수정된 내용으로 업데이트 > 수정 필요
+        };
+      }
+      return data;
+    });
+    setNewContent(updatedContent);
+    setIsAbleEdit(false);
+  };
+  const handleEditCancel = () => {
+    console.log("수정취소버튼 클릭");
+    setIsAbleEdit(false);
+  };
+
+  const handleChangeContent = (e) => {
+    setEditedContent(e.target.value);
+  };
   return (
     <>
       <table>
@@ -49,16 +74,40 @@ const GuestTable = ({ content }) => {
               <td className="table-contentBox">
                 {isAbleEdit ? (
                   <>
-                    <input type="text" placeholder="수정 할 내용 입력"></input>
+                    <input
+                      type="text"
+                      placeholder="수정 할 내용 입력"
+                      value={editedContent}
+                      onChange={handleChangeContent}
+                    ></input>
                   </>
                 ) : (
                   <>{data.inputText}</>
                 )}
                 <div className="table-btnBox">
-                  <button className="btn-edit" onClick={() => handleEdit(data)}>
-                    수정
-                  </button>
-                  <button className="btn-del">삭제</button>
+                  {isAbleEdit ? (
+                    <>
+                      <button className="btn-edit-ok" onClick={handleEditOk}>
+                        수정완료
+                      </button>
+                      <button
+                        className="btn-edit-no"
+                        onClick={handleEditCancel}
+                      >
+                        취소
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="btn-edit"
+                        onClick={() => handleEdit(data)}
+                      >
+                        수정
+                      </button>
+                      <button className="btn-del">삭제</button>
+                    </>
+                  )}
                 </div>
               </td>
             </tr>
