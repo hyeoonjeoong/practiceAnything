@@ -4,30 +4,15 @@ $theme-color: (
   "grey": #959799,
 );
 
-@mixin basicLayout {
+@mixin flexCenter {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.pageWrapper {
-  display: flex;
+
+@mixin basicLayout {
+  @include flexCenter;
   flex-direction: column;
-
-  align-items: center;
-  width: 90vw;
-  height: 90vh;
-  background-color: map-get($theme-color, "light");
-}
-
-.write-form {
-  @include basicLayout;
-  height: 150px;
-}
-
-.write-font {
-  color: map-get($theme-color, "basic");
-  font-size: 0.9em;
 }
 
 @mixin basicInput {
@@ -44,16 +29,8 @@ $theme-color: (
     outline: none;
   }
 }
-.writer-input {
-  @include basicInput;
-  width: 130px;
-}
-.text-input {
-  @include basicInput;
-  width: 345px;
-}
 
-@mixin buttons {
+@mixin buttonStyle {
   font-size: 0.8em;
   border-radius: 7px;
   background-color: map-get($theme-color, "basic");
@@ -66,20 +43,63 @@ $theme-color: (
     color: map-get($theme-color, "light");
   }
 }
+.pageWrapper {
+  @include flexCenter;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  background-color: map-get($theme-color, "light");
+}
+
+.write-form {
+  @include basicLayout;
+  height: 150px;
+}
+
+.write-font {
+  color: map-get($theme-color, "basic");
+  font-size: 0.9em;
+}
+
+.writer-input {
+  @include basicInput;
+  width: 130px;
+}
+.text-input {
+  @include basicInput;
+  width: 345px;
+}
+.text-input-edit {
+  @include basicInput;
+  width: 345px;
+  margin: 0;
+}
 
 .btn-add {
-  @include buttons;
+  @include buttonStyle;
   width: 80px;
 }
 
 .btn-edit {
-  @include buttons;
+  @include buttonStyle;
   background-color: #a7bbbc;
   margin: 0px 3px;
   width: 40px;
 }
+.btn-edit-ok,
+.btn-edit-no {
+  @include buttonStyle;
+  background-color: #fff;
+  border: 1px solid map-get($theme-color, "basic");
+  color: map-get($theme-color, "basic");
+  margin: 0px 3px;
+  width: 60px;
+}
+.btn-edit-no {
+  width: 40px;
+}
 .btn-del {
-  @include buttons;
+  @include buttonStyle;
   background-color: #a7bbbc;
   margin: 0px 3px;
   width: 40px;
@@ -123,7 +143,7 @@ td {
 }
 .table-contentBox {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .table-btnBox {

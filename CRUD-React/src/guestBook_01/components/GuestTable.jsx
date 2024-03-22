@@ -72,6 +72,7 @@ const GuestTable = ({ content, updateContent }) => {
                         placeholder="수정 할 내용을 입력해주세요."
                         value={editedContent}
                         onChange={handleChangeContent}
+                        className="text-input-edit"
                       ></input>
                     </>
                   ) : (
