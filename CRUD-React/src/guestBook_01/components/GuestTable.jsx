@@ -1,54 +1,49 @@
 import React, { useEffect, useState } from "react";
 
-const GuestTable = ({ content }) => {
+const GuestTable = ({ content, updateContent }) => {
   const [isAbleEdit, setIsAbleEdit] = useState(false);
 
   const [inputPw, setInputPw] = useState("");
-  const [editedContent, setEditedContent] = useState("");
+  const [editedContent, setEditedContent] = useState(content.inputText);
   const [newContent, setNewContent] = useState("");
   const [clickedData, setClickedData] = useState({});
   const [clickedDataId, setClickedDataId] = useState("");
 
   const handleEdit = (data) => {
     console.log("비밀번호: ", data.pw);
-    setInputPw("");
-    setClickedDataId(data.id);
-    setClickedData(data);
-
     const userInput = window.prompt("비밀번호를 입력해주세요.");
-    setInputPw(userInput);
-    handlePwConfirm();
-  };
 
-  const handlePwConfirm = () => {
-    if (clickedData.pw === inputPw) {
-      console.log("비밀번호 일치");
+    if (data.pw === userInput) {
       setIsAbleEdit(true);
+      setClickedDataId(data.id);
+      setClickedData(data);
     } else {
-      console.log("불일치. 수정 삭제 불가");
       alert("비밀번호가 일치하지 않습니다.");
       setIsAbleEdit(false);
-      return;
     }
   };
 
   const handleEditOk = () => {
-    console.log("수정완료버튼 클릭");
     console.log("수정할 글 Id: ", clickedDataId);
+    console.log("editedContent: ", editedContent);
     const updatedContent = content.map((data) => {
       if (data.id === clickedDataId) {
+        console.log("data.id", data.id);
+        console.log("data", data);
         return {
           ...data,
           inputText: editedContent,
         };
       }
-      return data;
+      setEditedContent("");
+      return data; // 조건에 맞지 않는 경우 원래 데이터를 반환!!
     });
-    setNewContent(updatedContent);
+    updateContent(updatedContent);
+    console.log("updated clickedData: ", clickedData);
     setIsAbleEdit(false);
   };
+
   const handleEditCancel = () => {
-    console.log("수정취소버튼 클릭");
     setIsAbleEdit(false);
   };
 
@@ -64,52 +59,53 @@ const GuestTable = ({ content }) => {
             <th className="table-content">내용</th>
           </tr>
         </thead>
-        {content.map((data) => (
-          <>
-            <tr key={data.id}>
-              <td className="table-writer">{data.writer}</td>
-              <td className="table-contentBox">
-                {isAbleEdit && clickedDataId === data.id ? (
-                  <>
-                    <input
-                      type="text"
-                      placeholder="수정 할 내용 입력"
-                      value={editedContent}
-                      onChange={handleChangeContent}
-                    ></input>
-                  </>
-                ) : (
-                  <>{data.inputText}</>
-                )}
-                <div className="table-btnBox">
-                  {isAbleEdit ? (
+        {content &&
+          content.map((data) => (
+            <>
+              <tr key={data.id}>
+                <td className="table-writer">{data.writer}</td>
+                <td className="table-contentBox">
+                  {isAbleEdit && clickedDataId === data.id ? (
                     <>
-                      <button className="btn-edit-ok" onClick={handleEditOk}>
-                        수정완료
-                      </button>
-                      <button
-                        className="btn-edit-no"
-                        onClick={handleEditCancel}
-                      >
-                        취소
-                      </button>
+                      <input
+                        type="text"
+                        placeholder="수정 할 내용을 입력해주세요."
+                        value={editedContent}
+                        onChange={handleChangeContent}
+                      ></input>
                     </>
                   ) : (
-                    <>
-                      <button
-                        className="btn-edit"
-                        onClick={() => handleEdit(data)}
-                      >
-                        수정
-                      </button>
-                      <button className="btn-del">삭제</button>
-                    </>
+                    <>{data.inputText}</>
                   )}
-                </div>
-              </td>
-            </tr>
-          </>
-        ))}
+                  <div className="table-btnBox">
+                    {isAbleEdit ? (
+                      <>
+                        <button className="btn-edit-ok" onClick={handleEditOk}>
+                          수정완료
+                        </button>
+                        <button
+                          className="btn-edit-no"
+                          onClick={handleEditCancel}
+                        >
+                          취소
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="btn-edit"
+                          onClick={() => handleEdit(data)}
+                        >
+                          수정
+                        </button>
+                        <button className="btn-del">삭제</button>
+                      </>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            </>
+          ))}
       </table>
     </>
   );

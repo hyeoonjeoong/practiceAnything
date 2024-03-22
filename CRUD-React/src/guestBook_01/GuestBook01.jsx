@@ -23,11 +23,15 @@ const GuestBook01 = () => {
     console.log(content);
   }, [content]);
 
+  const updateContent = (updatedContent) => {
+    setContent(updatedContent);
+  };
+
   return (
     <>
       <div className="pageWrapper">
         <Write writtenData={writtenData} />
-        <GuestTable content={content} />
+        <GuestTable content={content} updateContent={updateContent} />
         <SearchResult />
       </div>
     </>
