@@ -7,38 +7,39 @@ const GuestTable = ({ content }) => {
   const [editedContent, setEditedContent] = useState("");
   const [newContent, setNewContent] = useState("");
   const [clickedData, setClickedData] = useState({});
-  useEffect(() => {
-    //console.log(content);
-    console.log("입력한거: ", inputPw);
-    handlePwConfirm();
-  }, [inputPw]);
+  const [clickedDataId, setClickedDataId] = useState("");
 
   const handleEdit = (data) => {
     console.log("비밀번호: ", data.pw);
-    setClickedData(data);
     setInputPw("");
-    const userInput = prompt("비밀번호를 입력햊쉐요.");
+    setClickedDataId(data.id);
+    setClickedData(data);
+
+    const userInput = window.prompt("비밀번호를 입력해주세요.");
     setInputPw(userInput);
+    handlePwConfirm();
   };
 
-  const handlePwConfirm = (data) => {
+  const handlePwConfirm = () => {
     if (clickedData.pw === inputPw) {
       console.log("비밀번호 일치");
       setIsAbleEdit(true);
     } else {
       console.log("불일치. 수정 삭제 불가");
       alert("비밀번호가 일치하지 않습니다.");
+      setIsAbleEdit(false);
       return;
     }
   };
 
   const handleEditOk = () => {
     console.log("수정완료버튼 클릭");
+    console.log("수정할 글 Id: ", clickedDataId);
     const updatedContent = content.map((data) => {
-      if (data.id === clickedData.id) {
+      if (data.id === clickedDataId) {
         return {
           ...data,
-          inputText: editedContent, // 수정된 내용으로 업데이트 > 수정 필요
+          inputText: editedContent,
         };
       }
       return data;
@@ -68,7 +69,7 @@ const GuestTable = ({ content }) => {
             <tr key={data.id}>
               <td className="table-writer">{data.writer}</td>
               <td className="table-contentBox">
-                {isAbleEdit ? (
+                {isAbleEdit && clickedDataId === data.id ? (
                   <>
                     <input
                       type="text"
