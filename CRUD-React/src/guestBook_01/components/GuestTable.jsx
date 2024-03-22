@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const GuestTable = ({ content }) => {
-  const [isCheckPw, setIsCheckPw] = useState(false);
   const [isAbleEdit, setIsAbleEdit] = useState(false);
 
   const [inputPw, setInputPw] = useState("");
@@ -9,26 +8,23 @@ const GuestTable = ({ content }) => {
   const [newContent, setNewContent] = useState("");
   const [clickedData, setClickedData] = useState({});
   useEffect(() => {
-    console.log(content);
-  }, []);
+    //console.log(content);
+    console.log("입력한거: ", inputPw);
+    handlePwConfirm();
+  }, [inputPw]);
 
   const handleEdit = (data) => {
-    setIsCheckPw(true);
-    // console.log(data);
+    console.log("비밀번호: ", data.pw);
     setClickedData(data);
+    setInputPw("");
+    const userInput = prompt("비밀번호를 입력햊쉐요.");
+    setInputPw(userInput);
   };
 
-  const handlePwChange = (e) => {
-    setInputPw(e.target.value);
-    // console.log(e.target.value);
-  };
-  const handleConfirmPw = () => {
-    console.log("clickedData", clickedData);
-    console.log("inputPw", inputPw);
+  const handlePwConfirm = (data) => {
     if (clickedData.pw === inputPw) {
       console.log("비밀번호 일치");
       setIsAbleEdit(true);
-      setIsCheckPw(false);
     } else {
       console.log("불일치. 수정 삭제 불가");
       alert("비밀번호가 일치하지 않습니다.");
@@ -114,20 +110,6 @@ const GuestTable = ({ content }) => {
           </>
         ))}
       </table>
-      {isCheckPw && (
-        <>
-          <div>
-            <input
-              type="password"
-              className="writer-input"
-              placeholder="비밀번호를 입력해주세요."
-              value={inputPw}
-              onChange={handlePwChange}
-            ></input>
-            <button onClick={handleConfirmPw}>확인</button>
-          </div>
-        </>
-      )}
     </>
   );
 };
