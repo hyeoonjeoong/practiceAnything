@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["Clusterer", "Geocode", "Kakao", "latlng", "naver"]
+  "cSpell.words": ["Clusterer", "Geocode", "Kakao", "latlng", "naver"],
+  "prettier.printWidth": 80, // 한 줄에 표시되는 양
+  "prettier.tabWidth": 2, // 탭 간격
+  "prettier.singleQuote": true, // '': 단따옴표를 기본 값
+  "prettier.trailingComma": "es5", // 객체, 배열, 함수 등의 후행에 쉼표
+  "prettier.semi": true
 }
