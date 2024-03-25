@@ -26,6 +26,7 @@ function ProductDetail(props) {
   let [count, setCount] = useState(0);
   let [alertMsg, setAlertMsg] = useState(true);
   let [inputValue, setInputValue] = useState('');
+  let [isTab, setIsTab] = useState(0);
 
   const { products } = props;
   //useParams()를 사용하면 현재 /:url파라미터 자리에 유저가 입력한 값을 가져올 수 있다.
@@ -119,21 +120,41 @@ function ProductDetail(props) {
         </Row>
         <Nav variant="tabs" defaultActiveKey="link0">
           <Nav.Item>
-            <Nav.Link eventKey="link0">상세 정보</Nav.Link>
+            <Nav.Link eventKey="link0" onClick={() => setIsTab(0)}>
+              상세 정보
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link1">사이즈</Nav.Link>
+            <Nav.Link eventKey="link1" onClick={() => setIsTab(1)}>
+              사이즈
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link2">리뷰</Nav.Link>
+            <Nav.Link eventKey="link2" onClick={() => setIsTab(2)}>
+              리뷰
+            </Nav.Link>
           </Nav.Item>
         </Nav>
-        <div>상세 정보</div>
-        <div>사이즈</div>
-        <div>리뷰</div>
+        <TabContent isTab={isTab} />
       </Container>
     </>
   );
 }
 
+function TabContent({ isTab }) {
+  //---------if문으로 해도 되지만
+  // if (isTab == 0) {
+  //   return <div>내용0</div>;
+  // }
+  // if (isTab == 1) {
+  //   return <div>내용1</div>;
+  // }
+  // if (isTab == 2) {
+  //   return <div>내용2</div>;
+  // }
+
+  //---------배열을 사용해도 된다.
+  //array자료형에서 [i] 인덱스를 가져온다.
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][isTab];
+}
 export default ProductDetail;
