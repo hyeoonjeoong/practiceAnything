@@ -1,38 +1,44 @@
 [
   {
-    "id": 0,
-    "title": "MOLDY DYED PUFFER JACKET BLACK",
-    "content": "only 5 inches",
-    "price": 329000
+    "id": 6,
+    "title": "SYMBOL LOGO BEANIE IVORY",
+    "content": "ADDOFF 심볼로고를 활용한 점묘 그래픽 아트워크",
+    "price": 336000,
+    "img": "https://addoff.co.kr/web/product/small/202309/be51849b92ae8cdcbab4f0b149cfff6a.jpg"
   },
   {
-    "id": 1,
-    "title": "PELERINE HOOD JUMPER LIGHT KHAKI",
-    "content": "for less than 6",
-    "price": 219000
+    "id": 7,
+    "title": "NEED LOVE GIRL SWEAT CHARCOAL",
+    "content": "박시한 실루엣과 크롭한 기장감으로 유니크한 실루엣 연출",
+    "price": 55300,
+    "img": "https://addoff.co.kr/web/product/small/202308/6bfc8cf28c1af95f48e79e95926e890f.jpg"
   },
   {
-    "id": 2,
+    "id": 8,
+    "title": "DUPLICITY WASHED BAGGY DENIM PANTS BLUE",
+    "content": "박시한 실루엣과 상반되는 좁은밑단둘레로 유니크한 실루엣 연출",
+    "price": 76300,
+    "img": "https://addoff.co.kr/web/product/small/202308/380e0f3688e51790228bd3fb86b3504b.jpg"
+  },
+  {
+    "id": 9,
     "title": "CRESCENT MOON HOBO BAG BLACK",
-    "content": "Born in France",
-    "price": 129000
+    "content": "측면 스트링 디테일사용으로 입체감 강조",
+    "price": 90300,
+    "img": "https://addoff.co.kr/web/product/small/202308/9e392d8a2674abb6b90a6909c14a06c0.jpg"
   },
   {
-    "id": 3,
-    "title": "MOLDY DYED PUFFER JACKET BLACK",
-    "content": "only 5 inches",
-    "price": 329000
+    "id": 10,
+    "title": "GLOOMY WASHED DENIM PANTS BLUE",
+    "content": "애드오프 개발 리벳, 스냅 포인트",
+    "price": 109000,
+    "img": "https://addoff.co.kr/web/product/small/202310/73e2d6dabd3123d5144222ed6494be08.jpg"
   },
   {
-    "id": 4,
-    "title": "PELERINE HOOD JUMPER LIGHT KHAKI",
-    "content": "for less than 6",
-    "price": 219000
-  },
-  {
-    "id": 5,
-    "title": "CRESCENT MOON HOBO BAG BLACK",
-    "content": "Born in France",
-    "price": 129000
+    "id": 11,
+    "title": "ADDOFF EMBOSSED DENIM JACKET BLUE",
+    "content": "데님의 뒷면을 사용한 인사이드 아웃 데님자켓",
+    "price": 132300,
+    "img": "https://addoff.co.kr/web/product/small/202309/81e23dad7336441bda3e12cc134e6e28.jpg"
   }
 ]

@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 //✅--컴포넌트의 LifeCycle
 //mount - 컴포넌트가 보여지는, 페이지에 장착되는
@@ -25,7 +25,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 function ProductDetail(props) {
   let [count, setCount] = useState(0);
   let [alertMsg, setAlertMsg] = useState(true);
-  let [inputValue, setInputValue] = useState("");
+  let [inputValue, setInputValue] = useState('');
 
   const { products } = props;
   //useParams()를 사용하면 현재 /:url파라미터 자리에 유저가 입력한 값을 가져올 수 있다.
@@ -40,7 +40,7 @@ function ProductDetail(props) {
   //--- 뒤에 붙은 []는 의존성배열. 조건과 같다. 해당 변수가 달라질 때 마다 useEffect내부의 코드를 실행해준다.
 
   useEffect(() => {
-    console.log("hi, useEffect");
+    console.log('hi, useEffect');
 
     setTimeout(() => {
       //렌더링 후 2초 후에 alert 사라지게 하기
@@ -81,15 +81,15 @@ function ProductDetail(props) {
   //(숙제) input 숫자 아닌 값이 들어오면 alert 띄우기
   useEffect(() => {
     if (isNaN(inputValue) == true) {
-      console.log("Not a Number");
-      alert("숫자만 입력해주세요.");
+      console.log('Not a Number');
+      alert('숫자만 입력해주세요.');
     }
   }, [inputValue]);
 
   const findProduct = products.find((product) => product.id == id);
   console.log(findProduct);
   if (!findProduct) {
-    console.log("상품을 찾을 수 없습니다.");
+    console.log('상품을 찾을 수 없습니다.');
   }
 
   return (
