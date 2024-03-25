@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
 
 //✅--컴포넌트의 LifeCycle
 //mount - 컴포넌트가 보여지는, 페이지에 장착되는
@@ -117,6 +117,20 @@ function ProductDetail(props) {
             </Col>
           </React.Fragment>
         </Row>
+        <Nav variant="tabs" defaultActiveKey="link0">
+          <Nav.Item>
+            <Nav.Link eventKey="link0">상세 정보</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link1">사이즈</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link2">리뷰</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <div>상세 정보</div>
+        <div>사이즈</div>
+        <div>리뷰</div>
       </Container>
     </>
   );
