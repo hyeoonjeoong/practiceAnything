@@ -8,6 +8,7 @@ import data from './data.js';
 
 import MainProducts from './pages/MainProducts.jsx';
 import ProductDetail from './components/ProductDetail.js';
+import Cart from './components/Cart.js';
 
 export let Context1 = createContext();
 
@@ -57,6 +58,7 @@ function App() {
             </Context1.Provider>
           }
         />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Routes>
         {/* --------------------- */}
