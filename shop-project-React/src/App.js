@@ -1,16 +1,19 @@
-import "./App.css";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import './App.css';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 
-import React, { useState } from "react";
-import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
+import React, { createContext, useState } from 'react';
+import { Route, Routes, Link, useNavigate, Outlet } from 'react-router-dom';
 
-import data from "./data.js";
+import data from './data.js';
 
-import MainProducts from "./pages/MainProducts.jsx";
-import ProductDetail from "./components/ProductDetail.js";
+import MainProducts from './pages/MainProducts.jsx';
+import ProductDetail from './components/ProductDetail.js';
+
+export let Context1 = createContext();
 
 function App() {
   let [products] = useState(data);
+  let [stock] = useState([10, 11, 12]);
 
   const navigate = useNavigate();
 
@@ -22,14 +25,14 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {
-                navigate("/");
+                navigate('/');
               }}
             >
               Home
             </Nav.Link>
             <Nav.Link
               onClick={() => {
-                navigate("/detail");
+                navigate('/detail');
               }}
             >
               Detail
@@ -48,7 +51,11 @@ function App() {
         <Route path="/" element={<MainProducts products={products} />} />
         <Route
           path="/detail/:id"
-          element={<ProductDetail products={products} />}
+          element={
+            <Context1.Provider value={{ stock }}>
+              <ProductDetail products={products} />
+            </Context1.Provider>
+          }
         />
       </Routes>
       <Routes>

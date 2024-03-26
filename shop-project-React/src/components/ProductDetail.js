@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+
+import { Context1 } from '../App.js';
 
 //✅--컴포넌트의 LifeCycle
 //mount - 컴포넌트가 보여지는, 페이지에 장착되는
@@ -23,6 +25,13 @@ import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
 // }
 
 function ProductDetail(props) {
+  let { stock } = useContext(Context1); //보관함 해체!
+  //✅ Context API 특징
+  //1. state변경 시 쓸데없는 것 까지 재렌더링된다.
+  //하위 컴포넌트에서 사용하지 않더라도 무조건 다 재렌더링되어 비효율적이다.
+  //2. 나중에 컴포넌트의 재사용이 어렵다. 다른 페이지에서 사용하려 할 때 변수명이 없다거나 등
+  //사용해보면 좋겠지만 실제로는 잘 쓰지 않는다. 외부 라이브러리를 주로 사용한다.
+
   let [count, setCount] = useState(0);
   let [alertMsg, setAlertMsg] = useState(true);
   let [inputValue, setInputValue] = useState('');
@@ -109,6 +118,7 @@ function ProductDetail(props) {
               <h4 className="pt-5">{findProduct.title}</h4>
               <p>{findProduct.content}</p>
               <p>{findProduct.price}</p>
+              <p>useContext 잘 온다 ! {stock}</p>
               <input
                 type="text"
                 onChange={(e) => setInputValue(e.target.value)}
