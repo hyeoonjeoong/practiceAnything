@@ -142,6 +142,21 @@ function ProductDetail(props) {
 }
 
 function TabContent({ isTab }) {
+  const [fade, setFade] = useState('');
+
+  //---react의 automatic batching 기능
+  //state가 바뀔 때 마다 재렌더링하는게 아니라
+  //state변경 함수들이 가까이 있으면 다 처리하고 마지막 한 번만 재렌더링 된다.
+  //이럴 때 약간의 시간차를 주어서 처리 하는 것.
+  useEffect(() => {
+    setTimeout(() => {
+      setFade('end');
+    }, 100);
+
+    return () => {
+      setFade('');
+    };
+  }, [isTab]);
   //---------if문으로 해도 되지만
   // if (isTab == 0) {
   //   return <div>내용0</div>;
@@ -155,6 +170,10 @@ function TabContent({ isTab }) {
 
   //---------배열을 사용해도 된다.
   //array자료형에서 [i] 인덱스를 가져온다.
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][isTab];
+  return (
+    <div className={'start ' + fade}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][isTab]}
+    </div>
+  );
 }
 export default ProductDetail;
