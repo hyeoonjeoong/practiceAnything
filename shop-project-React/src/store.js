@@ -9,9 +9,17 @@ let user = createSlice({
   name: 'user',
   initialState: 'kim',
 });
+
+let stock = createSlice({
+  name: 'stock',
+  initialState: [10, 11, 12],
+});
 export default configureStore({
   reducer: {
-    // 작명 : user.reducer
     user: user.reducer,
+    stock: stock.reducer,
   },
 });
+
+//✅ 하지만 그렇다고 해서 Redux store에 모든 걸 넣으면 안된다.
+//굳이 공유 할 필요 없이 컴포넌트 내부에서만 쓸거면 필요 없다.
