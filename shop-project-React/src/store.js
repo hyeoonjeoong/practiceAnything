@@ -8,7 +8,23 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 let user = createSlice({
   name: 'user',
   initialState: 'kim',
+
+  //✅ redux state 변경하기 : state수정하는 함수를 만들고, 원할 때 그 함수를 실행해달라고 한다.
+  //✅redux state 변경하기 1. state수정해주는 함수 만들기
+  //기존 state가 필요하면 매개변수로 넣어준다.
+  //그리고 작성된 함수를 사용할 때 마다 변경되게 된다.
+  //이 함수는 export를 해줘야 한다. 다른데서 사용해야 하니까! 함수 빼서 내보내야 한다.
+  //user.actions 이러케 한다. 변경함수가 전부 그 자리에 출력된다. 이걸 변수로 저장해 export 한다.
+
+  reducers: {
+    changeName(state) {
+      return 'din' + state;
+    },
+  },
 });
+
+//✅ redux state 변경하기 2. 내보내기
+export let { changeName } = user.actions;
 
 let stock = createSlice({
   name: 'stock',
