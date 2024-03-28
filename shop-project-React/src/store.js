@@ -14,10 +14,27 @@ let stock = createSlice({
   name: 'stock',
   initialState: [10, 11, 12],
 });
+
+let cart = createSlice({
+  name: 'cart',
+  initialState: [
+    {
+      id: 0,
+      name: 'MOLDY DYED PUFFER JACKET BLACK',
+      count: 2,
+    },
+    {
+      id: 2,
+      name: 'CRESCENT MOON HOBO BAG BLACK',
+      count: 1,
+    },
+  ],
+});
 export default configureStore({
   reducer: {
     user: user.reducer,
     stock: stock.reducer,
+    cart: cart.reducer,
   },
 });
 
