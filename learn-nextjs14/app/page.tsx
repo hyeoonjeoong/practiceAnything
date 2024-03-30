@@ -1,5 +1,14 @@
+import Navigation from '../components/navigation';
+
 export default function Tomato() {
-  return <h1>Hello!</h1>;
+  return (
+    <>
+      <div>
+        <Navigation />
+        <h1>Main Page!</h1>
+      </div>
+    </>
+  );
 }
 
 // ✅ 리액트에서는 일일이 경로와 렌더링 될 컴포넌트를 직접 작성해줬다.
