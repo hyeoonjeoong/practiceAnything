@@ -3,14 +3,22 @@ const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 800;
 
-//--------------집 그려보기
-ctx.fillRect(200, 200, 50, 200);
-ctx.fillRect(400, 200, 50, 200);
-ctx.fillRect(300, 300, 50, 100);
-ctx.fillRect(200, 200, 200, 20);
-ctx.moveTo(200, 200);
-ctx.lineTo(325, 100);
-ctx.lineTo(450, 200);
+//--------------캐릭터 그려보기
+ctx.fillRect(210 - 40, 200 - 30, 15, 100);
+ctx.fillRect(350 - 40, 200 - 30, 15, 100);
+ctx.fillRect(260 - 40, 200 - 30, 60, 200);
+
+ctx.arc(250, 100, 50, 0, 2 * Math.PI);
+ctx.fill();
+
+ctx.beginPath(); //무언가 바뀔 필요가 있을 때 새로운 path를 만들어줘야 한다!
+ctx.fillStyle = 'white';
+ctx.arc(270, 80, 6, 0, 2 * Math.PI);
+ctx.arc(230, 80, 6, 0, 2 * Math.PI);
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(250, 100, 6, Math.PI, 2 * Math.PI);
 ctx.fill();
 
 //--------------사각형 그려보기
@@ -42,4 +50,14 @@ ctx.fill();
 // ctx.lineTo(50, 150);
 // ctx.lineTo(50, 50);
 // ctx.stroke();
+// ctx.fill();
+
+//--------------집 그려보기
+// ctx.fillRect(200, 200, 50, 200);
+// ctx.fillRect(400, 200, 50, 200);
+// ctx.fillRect(300, 300, 50, 100);
+// ctx.fillRect(200, 200, 200, 20);
+// ctx.moveTo(200, 200);
+// ctx.lineTo(325, 100);
+// ctx.lineTo(450, 200);
 // ctx.fill();
