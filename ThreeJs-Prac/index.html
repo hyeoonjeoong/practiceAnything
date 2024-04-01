@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Three.js</title>
+    <!-- https://sketchfab.com/feed -->
   </head>
   <body>
     <canvas id="canvas" width="300" height="300"></canvas>
@@ -12,7 +13,9 @@
             "imports": {
             "three": "https://unpkg.com/three@0.138.3/build/three.module.js",
             "GLTFLoader":
-            "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js"
+            "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.141.0/examples/jsm/"
+            
           }
         }
 </script>
@@ -21,60 +24,91 @@
         GLTFLoader
       } from "GLTFLoader";
       import * as THREE from "three";
+      import {
+        OrbitControls
+      } from 'three/addons/controls/OrbitControls.js';
 
-      //✅ 장면을 만들고 브라우저에 렌더링해주세요. 하면 된다!
-      let scene = new THREE.Scene();
-      let renderer = new THREE.WebGLRenderer({
-        //어디에 보여줄 지
-        canvas: document.querySelector("#canvas"),
-        antialias: true //테두리 계단 현상 좀 부드러워진다.
-      })
-      //gltf파일은 색상 인코딩 형식을 바꿔줘야 브라우저에서 원하는 색상으로 보여진다.
-      renderer.outputEncoding = THREE.sRGBEncoding;
+      //------------------------------requestAnimationFrame------------------------------
+      //   //✅ 장면을 만들고 브라우저에 렌더링해주세요. 하면 된다!
+      //   let scene = new THREE.Scene();
+      //   let renderer = new THREE.WebGLRenderer({
+      //     //어디에 보여줄 지
+      //     canvas: document.querySelector("#canvas"),
+      //     antialias: true //테두리 계단 현상 좀 부드러워진다.
+      //   })
+      //   //✅ gltf파일은 색상 인코딩 형식을 바꿔줘야 브라우저에서 원하는 색상으로 보여진다.
+      //   renderer.outputEncoding = THREE.sRGBEncoding;
 
-      //✅ 3D model 을 보여줄 때는 카메라, 조명, 배경이 필요하다.
-      //camera 에는 2가지 있다.
-      //1) PerspectiveCamera - 원근법 적용
-      //2) OrthographicCamera - 원근법 미적용
-      let camera = new THREE.PerspectiveCamera(30, 1);
-      camera.position.set(0, 0, 5) //카메라 위치 조정. (x, y, z)
+      //   //✅ 3D model 을 보여줄 때는 카메라, 조명, 배경이 필요하다.
+      //   //camera 에는 2가지 있다.
+      //   //1) PerspectiveCamera - 원근법 적용
+      //   //2) OrthographicCamera - 원근법 미적용
+      //   let camera = new THREE.PerspectiveCamera(30, 1);
+      //   camera.position.set(0, 0, 5) //카메라 위치 조정. (x, y, z)
 
 
-      //✅ 배경
-      scene.background = new THREE.Color("white")
 
-      //✅ 조명 (참고로 표면 재질에 따라 조명 안먹는 경우도 있다.)
-      //light 에는 3가지 있다.
-      //1) AmbientLight
-      //2) PointLight
-      //3) DirectionalLight
+      //   //✅ 배경
+      //   scene.background = new THREE.Color("white")
+
+      //   //✅ 조명 (참고로 표면 재질에 따라 조명 안먹는 경우도 있다.)
+      //   //light 에는 3가지 있다.
+      //   //1) AmbientLight
+      //   //2) PointLight
+      //   //3) DirectionalLight
       //   let light = new THREE.DirectionalLight(0xffff00, 10);
       //   scene.add(light)
 
-      //이런식으로 렌더링해주세요! 할 수 있다.
-      // scene.add(개)
+      //   //이런식으로 렌더링해주세요! 할 수 있다.
+      //   // scene.add(개)
 
-      //✅ 근데 GLTF파일은 다른 방법으로 가져와야 한다.
-      //불러오고 이후 실행시키고 싶은게 있으면 콜백함수 넣어준다.
+      //   //✅ 근데 GLTF파일은 다른 방법으로 가져와야 한다.
+      //   //불러오고 이후 실행시키고 싶은게 있으면 콜백함수 넣어준다.
+      //   let loader = new GLTFLoader();
+      //   loader.load("shiba/scene.gltf", function(gltf) {
+      //     scene.add(gltf.scene) //장면에 시바 넣고
+      //     // renderer.render(scene, camera) //시바를 보여달라. 카메라도 불러와서.
+
+      //     //✅ 애니메이션 적용하기
+      //     function animate() {
+      //       //여기에 적으면 1초에 60번 실행된다.
+      //       requestAnimationFrame(animate)
+      //       //y축으로 회전 시키기
+      //       gltf.scene.rotation.y -= 0.1;
+      //       //x축으로 회전 시키기
+      //       gltf.scene.rotation.x -= 0.1;
+      //       //이걸 화면에 보여달라.
+      //       renderer.render(scene, camera)
+      //     }
+      //     animate() //실행시켜줘야 한다!
+      //   })
+
+      //------------------------------OrbitControl------------------------------
+      //혼자 움직이는거 말고 마우스로 움직이고 싶으면 OrbitControl 사용해보면 된다.
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      renderer.outputEncoding = THREE.sRGBEncoding;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+      camera.position.set(0, 20, 100);
+      const controls = new OrbitControls(camera, renderer.domElement);
+
       let loader = new GLTFLoader();
       loader.load("shiba/scene.gltf", function(gltf) {
-        scene.add(gltf.scene) //장면에 시바 넣고
-        // renderer.render(scene, camera) //시바를 보여달라. 카메라도 불러와서.
-        //✅ 애니메이션 적용하기
-        function animate() {
-          //여기에 적으면 1초에 60번 실행된다.
-          requestAnimationFrame(animate)
-          //y축으로 회전 시키기
-          gltf.scene.rotation.y -= 0.1;
-          //x축으로 회전 시키기
-          gltf.scene.rotation.x -= 0.01;
-          //이걸 화면에 보여달라.
-          renderer.render(scene, camera)
-        }
-        animate() //실행시켜줘야 한다!
-      })
+        const shiba = gltf.scene;
+        scene.add(shiba);
 
-      //혼자 움직이는거 말고 마우스로 움직이고 싶으면 OrbitControl 사용해보면 된다.
+        function animate() {
+          requestAnimationFrame(animate)
+          controls.update();
+
+          renderer.render(scene, camera);
+        }
+        animate()
+      })
     </script>
 
   </body>
