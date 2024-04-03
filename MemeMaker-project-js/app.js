@@ -2,24 +2,30 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 800;
-
 ctx.lineWidth = 2;
-ctx.moveTo(0, 0);
 
-const colors = ['#EFBC9B', '#FBF3D5', '#D6DAC8', '#9CAFAA'];
+let isPainting = false;
 
-function onClick(event) {
-  //console.log(event);
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  ctx.strokeStyle = color;
-  ctx.lineTo(event.offsetX, event.offsetY);
-  ctx.stroke(); //선긋기 해줘야 화면에 보여진다!
+function onMove(event) {
+  if (isPainting) {
+    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.stroke();
+    return;
+  }
+  ctx.moveTo(event.offsetX, event.offsetY);
 }
 
-// canvas.addEventListener('click', onClick);
-canvas.addEventListener('mousemove', onClick);
+function startPainting() {
+  isPainting = true;
+}
+
+function cancelPainting() {
+  isPainting = false;
+}
+canvas.addEventListener('mousemove', onMove);
+canvas.addEventListener('mousedown', startPainting);
+canvas.addEventListener('mouseup', cancelPainting);
+canvas.addEventListener('mouseleave', cancelPainting);
 
 //--------------사각형 그려보기
 // ctx.fillRect(50, 50, 100, 200); -> 얘는 단축함수
@@ -79,3 +85,21 @@ canvas.addEventListener('mousemove', onClick);
 // ctx.beginPath();
 // ctx.arc(250, 100, 6, Math.PI, 2 * Math.PI);
 // ctx.fill();
+
+//--------------클릭하면 선 긋기, 마우스가 움직임에 따라 선 긋기
+// ctx.moveTo(0, 0);
+
+// const colors = ['#EFBC9B', '#FBF3D5', '#D6DAC8', '#9CAFAA'];
+
+// function onClick(event) {
+//   //console.log(event);
+//   ctx.beginPath();
+//   ctx.moveTo(0, 0);
+//   const color = colors[Math.floor(Math.random() * colors.length)];
+//   ctx.strokeStyle = color;
+//   ctx.lineTo(event.offsetX, event.offsetY);
+//   ctx.stroke(); //선긋기 해줘야 화면에 보여진다!
+// }
+
+// // canvas.addEventListener('click', onClick);
+// canvas.addEventListener('mousemove', onClick);
