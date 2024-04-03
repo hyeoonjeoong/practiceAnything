@@ -3,23 +3,23 @@ const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 800;
 
-//--------------캐릭터 그려보기
-ctx.fillRect(210 - 40, 200 - 30, 15, 100);
-ctx.fillRect(350 - 40, 200 - 30, 15, 100);
-ctx.fillRect(260 - 40, 200 - 30, 60, 200);
+ctx.lineWidth = 2;
+ctx.moveTo(0, 0);
 
-ctx.arc(250, 100, 50, 0, 2 * Math.PI);
-ctx.fill();
+const colors = ['#EFBC9B', '#FBF3D5', '#D6DAC8', '#9CAFAA'];
 
-ctx.beginPath(); //무언가 바뀔 필요가 있을 때 새로운 path를 만들어줘야 한다!
-ctx.fillStyle = 'white';
-ctx.arc(270, 80, 6, 0, 2 * Math.PI);
-ctx.arc(230, 80, 6, 0, 2 * Math.PI);
-ctx.fill();
+function onClick(event) {
+  //console.log(event);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  ctx.strokeStyle = color;
+  ctx.lineTo(event.offsetX, event.offsetY);
+  ctx.stroke(); //선긋기 해줘야 화면에 보여진다!
+}
 
-ctx.beginPath();
-ctx.arc(250, 100, 6, Math.PI, 2 * Math.PI);
-ctx.fill();
+// canvas.addEventListener('click', onClick);
+canvas.addEventListener('mousemove', onClick);
 
 //--------------사각형 그려보기
 // ctx.fillRect(50, 50, 100, 200); -> 얘는 단축함수
@@ -60,4 +60,22 @@ ctx.fill();
 // ctx.moveTo(200, 200);
 // ctx.lineTo(325, 100);
 // ctx.lineTo(450, 200);
+// ctx.fill();
+
+//--------------캐릭터 그려보기
+// ctx.fillRect(210 - 40, 200 - 30, 15, 100);
+// ctx.fillRect(350 - 40, 200 - 30, 15, 100);
+// ctx.fillRect(260 - 40, 200 - 30, 60, 200);
+
+// ctx.arc(250, 100, 50, 0, 2 * Math.PI);
+// ctx.fill();
+
+// ctx.beginPath(); //무언가 바뀔 필요가 있을 때 새로운 path를 만들어줘야 한다!
+// ctx.fillStyle = 'white';
+// ctx.arc(270, 80, 6, 0, 2 * Math.PI);
+// ctx.arc(230, 80, 6, 0, 2 * Math.PI);
+// ctx.fill();
+
+// ctx.beginPath();
+// ctx.arc(250, 100, 6, Math.PI, 2 * Math.PI);
 // ctx.fill();
