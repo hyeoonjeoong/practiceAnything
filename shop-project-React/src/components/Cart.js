@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName } from '../store.js';
+//import { changeName, increase } from '../store.js';
+import { changeName, increase } from '../store/userSlice.js';
 
 const Cart = () => {
   //✅ 장바구니 state가 App, Detail, Cart 이렇게 여러 컴포넌트에서 필요하다면
@@ -21,6 +22,7 @@ const Cart = () => {
   ////----------------------------------------
 
   let state = useSelector((state) => state);
+  console.log(state);
 
   //✅ redux state 변경하기 3.
   //store.js로 요청을 보내주는 함수.
@@ -30,7 +32,8 @@ const Cart = () => {
 
   return (
     <>
-      {state.user}의 장바구니
+      {state.user.name}의 장바구니. 나이는 {state.user.age}
+      <button onClick={() => dispatch(increase(10))}>나이더하기</button>
       <Table>
         <thead>
           <tr>
@@ -43,7 +46,7 @@ const Cart = () => {
         <tbody>
           {state.cart.map((a, i) => (
             <tr key={i}>
-              <td>1</td>
+              <td>{state.cart[i].id}</td>
               <td>{state.cart[i].name}</td>
               <td>{state.cart[i].count}</td>
               <td>
