@@ -1,4 +1,10 @@
-export default function Tomato() {
+import { title } from 'process';
+
+export const metadata = {
+  title: 'Home',
+};
+
+export default function Page() {
   return (
     <>
       <div>
@@ -8,10 +14,10 @@ export default function Tomato() {
   );
 }
 
-// ✅ 리액트에서는 일일이 경로와 렌더링 될 컴포넌트를 직접 작성해줬다.
+// ✅ ------------리액트에서는 일일이 경로와 렌더링 될 컴포넌트를 직접 작성해줬다.
 // Next.js 에서는 url을 직접 적어 줄 필요가 없다. 파일 시스템을 통해서 해줄거다!
 
-// ✅ about-us 페이지를 만들고 싶다면?
+// ✅ ------------about-us 페이지를 만들고 싶다면?
 // app하위에 해당 폴더를 만들어 주면 된다. (이 폴더명이 잠재적으로 하나의 페이지가 있다고 알려주는 셈!)
 // 그냥 냅두면 경로가 될 수 없다. 보여줄 UI가 필요하다.
 // 여기서 page.tsx 만들어주면 된다. (return 꼭 해줘야 한다!!!!!! )
@@ -24,3 +30,8 @@ export default function Tomato() {
 // 별도로 component폴더를 둬도 된다.
 // 어쨌든 page.tsx 파일이 아니면 사용자는 접근할 수 없다.
 // page.tsx 이 사용자가 해당 url에 접근했을 때 모든 걸 보여주는 요소이다.
+
+// ✅ ------------Route groups
+//폴더 이름을 괄호로 묶어줘야 한다.
+//원래는 폴더명이 곧 경로가 되지만, 괄호로 묶어주면 url이 생성되지 않는다. url에 영향을 전혀 안준다!
+//최상단 root에 냅다 page.tsx로 두는 것 보다 그룹화되어 더 명시적이다.
