@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import { Context1 } from '../App.js';
+import { addItem } from '../store.js';
 
 //✅--컴포넌트의 LifeCycle
 //mount - 컴포넌트가 보여지는, 페이지에 장착되는
@@ -48,6 +50,8 @@ function ProductDetail(props) {
   //서버에서 데이터 가져올 때에도 주로 사용한다. (html보여주는 것에 비해 덜 중요한.)
   //타이머 장착하거나.
   //--- 뒤에 붙은 []는 의존성배열. 조건과 같다. 해당 변수가 달라질 때 마다 useEffect내부의 코드를 실행해준다.
+
+  let dispatch = useDispatch();
 
   useEffect(() => {
     console.log('hi, useEffect');
@@ -124,7 +128,20 @@ function ProductDetail(props) {
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="수량을 입력해주세요."
               ></input>
-              <Button variant="dark">주문하기</Button>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  dispatch(
+                    addItem({
+                      id: findProduct.id,
+                      name: findProduct.title,
+                      count: 1,
+                    })
+                  );
+                }}
+              >
+                주문하기
+              </Button>
             </Col>
           </React.Fragment>
         </Row>
