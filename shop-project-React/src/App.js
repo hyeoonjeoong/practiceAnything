@@ -43,13 +43,21 @@ function App() {
             <Nav.Link href="#top">Top</Nav.Link>
             <Nav.Link href="#bottom">Bottom</Nav.Link>
             <Nav.Link href="#acc">Acc</Nav.Link>
-            <Nav.Link href="#features">Cart</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate('/cart');
+              }}
+            >
+              Cart
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
       <Routes>
         <Route path="/" element={<MainProducts products={products} />} />
+        <Route path="/cart" element={<Cart />} />
+
         <Route
           path="/detail/:id"
           element={
@@ -58,7 +66,6 @@ function App() {
             </Context1.Provider>
           }
         />
-        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Routes>
         {/* --------------------- */}
