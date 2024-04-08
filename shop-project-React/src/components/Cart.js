@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCount, minusCount } from '../store.js';
+import { addCount, minusCount, deleteItem } from '../store.js';
 import { changeName, increase } from '../store/userSlice.js';
 
 const Cart = () => {
@@ -70,7 +70,7 @@ const Cart = () => {
               <td>
                 <button
                   onClick={() => {
-                    dispatch(addCount(state.cart[i].id));
+                    dispatch(deleteItem(state.cart[i].id));
                   }}
                 >
                   ✖️
