@@ -17,7 +17,13 @@
 
 - kakaoMap API 적용을 위한 연습 공간.
 
+### 📁 learn-nextjs14
+
+- Next.js 연습 공간.
+
 ### 📁 MyMBTI-project
+
+- html, css, javaScript를 사용한 심리테스트 사이트.
 
 ### 📁 react-Prac
 
@@ -37,3 +43,5 @@
 - TypeScript 연습 공간.
 
 ### 📁 udemy-React
+
+- udemy 강의 연습 공간.
