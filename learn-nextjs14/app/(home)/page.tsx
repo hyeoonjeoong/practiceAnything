@@ -1,18 +1,53 @@
-import { title } from 'process';
+'use client';
 
-export const metadata = {
-  title: 'Home',
-};
+import { title } from 'process';
+import { useEffect, useState } from 'react';
+
+//⬇⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+//-------------기존 리액트에서의 data fetching 빙식
+
+//'use client'에서는 metadata 사용할 수 없다.
+// export const metadata = {
+//   title: 'Home',
+// };
 
 export default function Page() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [movies, setMovies] = useState();
+  const getMovies = async () => {
+    const response = await fetch(
+      'https://nomad-movies.nomadcoders.workers.dev/movies'
+    );
+    const json = await response.json();
+    setMovies(json);
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    getMovies();
+  }, []);
   return (
     <>
       <div>
-        <h1>Main Page!</h1>
+        <div>{isLoading ? 'Loading...' : JSON.stringify(movies)}</div>
       </div>
     </>
   );
 }
+//✅ 보통 리액트에서의 data fetching 방법이다.
+//이는 결국 사용자에게 로딩 상태를 보여줘야 한다. 그리고 항상 client 측에서 일어난다. 브라우저가 API요청을 보내게 되는 것.
+//결국 여기에는 비밀스러운 정보를 담아서 보낼 수 없다. 위험하다!
+
+//---> 모든 것을 client에서 fetching 한다면?
+//-- 보안을 위해 항상 API를 중간에 만들어야 하고, 데이터베이스에 직접 통신할 수 없다.
+//API에 요청을 먼저 하고, API가 안전한 환경에 있다면 그 뒤에 데이터베이스에 요청을 보내게 된다.
+//-- 로딩상태를 항상 확인해줘야 한다. 이에 따른 useState 상태도 관리해야 한다. 우리가 스스로 관리해야 한다.
+//useState를 사용 -> 'use client' 설정 -> metadata 도 사용 불가 ㅠ.ㅠ
+
+//---> 하지만 API 없이 직접 데이터베이스와 통신할 수 있다면 ? (server component에서 fetch를 한다면!)
+//-- useState, useEffect를 사용하지 않아도 된다. 별도의 로딩 상태를 구현하지 않아도 된다. NextJs가 대신 해줄거다!!
+//단 이 작업은 꼭 server component에서 진행되어야 한다.
+
+//⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️
 
 // ✅ ------------리액트에서는 일일이 경로와 렌더링 될 컴포넌트를 직접 작성해줬다.
 // Next.js 에서는 url을 직접 적어 줄 필요가 없다. 파일 시스템을 통해서 해줄거다!
