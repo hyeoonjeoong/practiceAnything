@@ -90,12 +90,16 @@ let cart = createSlice({
       state.push(action.payload);
     },
     deleteItem(state, action) {
-      let cartId = state.findIndex((a) => {
-        return a.id === action.payload;
-      });
-      if (cartId) {
-        return state.filter((item) => item.id !== action.payload);
-      }
+      const deletedItemId = action.payload;
+      console.log(state);
+      console.log(deletedItemId);
+      return state.filter((item) => item.id !== deletedItemId);
+      // let cartId = state.findIndex((a) => {
+      //   return a.id === action.payload;
+      // });
+      // if (cartId) {
+      //   return state.filter((item) => item.id !== action.payload);
+      // }
     },
   },
 });

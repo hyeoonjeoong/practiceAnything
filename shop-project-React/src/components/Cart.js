@@ -22,7 +22,7 @@ const Cart = () => {
   ////----------------------------------------
 
   let state = useSelector((state) => state);
-  console.log(state);
+  //console.log(state);
 
   //✅ redux state 변경하기 3.
   //store.js로 요청을 보내주는 함수.
