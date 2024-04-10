@@ -106,6 +106,16 @@ function ProductDetail(props) {
     console.log('상품을 찾을 수 없습니다.');
   }
 
+  useEffect(() => {
+    console.log(findProduct.id);
+    let watchedItem = localStorage.getItem('watched');
+    watchedItem = JSON.parse(watchedItem);
+    watchedItem.push(findProduct.id);
+    watchedItem = new Set(watchedItem); //알아서 중복 제거해준다.!
+    watchedItem = Array.from(watchedItem); //new Set으로 새로 한 거 다시 Array로 뽑아오기
+    localStorage.setItem('watched', JSON.stringify(watchedItem));
+  }, []);
+
   return (
     <>
       <Container>

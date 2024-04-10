@@ -1,7 +1,7 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Route, Routes, Link, useNavigate, Outlet } from 'react-router-dom';
 
 import data from './data.js';
@@ -13,10 +13,25 @@ import Cart from './components/Cart.js';
 export let Context1 = createContext();
 
 function App() {
+  useEffect(() => {
+    if (localStorage.getItem('watched')) return;
+    localStorage.setItem('watched', JSON.stringify([]));
+  }, []);
+
   let [products] = useState(data);
   let [stock] = useState([10, 11, 12]);
 
   const navigate = useNavigate();
+
+  //localStorage
+  //-- 객체나 배열의 경우는 넣을 때 JSON 형태로 넣어야 한다.
+  let obj = { name: 'dana' };
+  //JSON.stringify(obj) //arr, object -> JSON변환 시 사용
+  localStorage.setItem('data', JSON.stringify(obj));
+  //-- 출력 할 때는?
+  //다시 object로 변환해줘야지
+  let 꺼낼거 = localStorage.getItem('data');
+  console.log(JSON.parse(꺼낼거).name);
 
   return (
     <>
