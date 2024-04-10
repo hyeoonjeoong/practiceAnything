@@ -4,7 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCount, minusCount, deleteItem } from '../store.js';
 import { changeName, increase } from '../store/userSlice.js';
 
+//✅ 경우에 따라서 다른 html 태그들을 보여주고 싶은 경우
+//state를 만들어놓고 if문으로 state를 다르게 하는 방법도 있지만, object/array 자료형을 응용해서 할 수도 있다.
+//자바스크립트 object 자료형에 내가 보여주고 싶은 HTML을 다 담아준다.
+//현재 key값에 맞는 value를 보여주는 것!
+const moreInfo = {
+  info: <p>상품정보</p>,
+  shipping: <p>배송관련</p>,
+  refund: <p>환불약관</p>,
+};
+
 const Cart = () => {
+  //moreInfo에 지정해 줄 현재 상태.
+  const nowTab = 'info';
+
   //✅ 장바구니 state가 App, Detail, Cart 이렇게 여러 컴포넌트에서 필요하다면
   //state는 어디에 만들어야 할 까?
   //최상위 컴포넌트에서 쓰면 된다. 근데 그럼 props 를 계속 보내주어야 한다.
@@ -80,6 +93,7 @@ const Cart = () => {
           ))}
         </tbody>
       </Table>
+      <div>{moreInfo[nowTab]}</div>
     </>
   );
 };
