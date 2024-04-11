@@ -9,6 +9,8 @@ import data from './data.js';
 import MainProducts from './pages/MainProducts.jsx';
 import ProductDetail from './components/ProductDetail.js';
 import Cart from './components/Cart.js';
+import axios from 'axios';
+import { useQuery } from 'react-query';
 
 export let Context1 = createContext();
 
@@ -32,6 +34,37 @@ function App() {
   //다시 object로 변환해줘야지
   let 꺼낼거 = localStorage.getItem('data');
   console.log(JSON.parse(꺼낼거).name);
+
+  //✅ react-query
+  //useQuery로 감싸서 사용한다. return 두개가 필요하다.
+  //--- 1) 요청 시 성공, 실패, 로딩 중인지 쉽게 파악하기에 좋다.
+  //result는 아래 변수! 원래 있는 거 아님. 이런식으로 기본적인 키워드로 더 쉽게 볼 수 있게 되는 것.
+  //result.data -> 요청이 성공했을 때 가져오는 데이터
+  //result.isLoading --> 요청이 로딩 중일 때 true가 된다.
+  //result.error --> 요청 실패했을 때 true가 된다.
+  //예를 들어 로딩 중일 때 "로딩중이다..."를 보여주고 싶다면?
+  // {result.isLoading} 이런식으로 바로 사용할 수 있다.
+  //그냥 리액트라면??? 일일이 useState를 사용해야 한다..
+  //--- 2) 자동으로 재요청 해준다. 신선한 데이터를 얻을 수 있다 자동으로 refetch해준다!
+  //{staleTime:2000} 이런식으로 타이머도 적용 가능하다.
+  //--- 3) 요청 실패 시 알아서 요청을 재시도 해준다.
+  //--- 4) state공유를 안해도 된다 .
+  //예를 들어 상위 컴포넌트, 하위 컴포넌트에서 같은 데이터가 필요하다?
+  //쌩 리액트라면 state를 만들어 props로 보내거나 하겠지만???
+  //얘는 걍 상위, 하위 컴포넌트에서 동일한 요청 똑같이 작성해줘도 된다.
+  //그럼 똑같은 요청을 두번이나 하면 비효율적이지 않은가?? ㄴㄴ!!
+  //react-query는 똑똑해서 같은 요청을 두번 하지 않는다. 알아서 합쳐서 한 번에 요청을 한다.
+  //캐싱도 해준다. 요청 결과를 기억을 해준다. 동일한 요청을 5분전에도 했다면? 그럼 5분 전 결과를 우선적으로 보여준다.
+  //이전 성공한 요청을 우선적으로 보여주고 요청을 진행한다! 클라이언트 측에서는 더 빠르다고 느낄 듯.
+
+  let result = useQuery('작명', () => {
+    return axios
+      .get('https://codingapple1.github.io/userdata.json')
+      .then((a) => {
+        return a.data;
+      });
+  });
+  console.log(result.data);
 
   return (
     <>
@@ -65,6 +98,9 @@ function App() {
             >
               Cart
             </Nav.Link>
+          </Nav>
+          <Nav className="ms-auto">
+            반가워요 {result.isLoading ? 'Loading...' : 'result.data.name'}
           </Nav>
         </Container>
       </Navbar>
