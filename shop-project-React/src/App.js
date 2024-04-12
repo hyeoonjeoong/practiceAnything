@@ -1,16 +1,40 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
-import React, { createContext, useEffect, useState } from 'react';
+import React, {
+  lazy,
+  Suspense,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 import { Route, Routes, Link, useNavigate, Outlet } from 'react-router-dom';
 
 import data from './data.js';
 
 import MainProducts from './pages/MainProducts.jsx';
-import ProductDetail from './components/ProductDetail.js';
-import Cart from './components/Cart.js';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+
+//✅ lazy import
+//import ProductDetail from './components/ProductDetail.js';
+//import Cart from './components/Cart.js';
+
+//-- 리액트 Single Page Application의 특징은 html, js 파일이 하나만 생성된다는 것이다.
+//초반에 js를 주르륵 다운받기 때문에 초기 로딩 속도가 느려질 수 있다.
+//현재 App.js 파일도 불러오는 js파일들이 있어 파일 사이즈가 다소 크다고 볼 수 있다.
+//그럼 여기서 더 효율적으로 하려면?? js파일을 잘게 쪼개면 된다! import방식을 바꿔주는 것.
+//-- ProductDetail, Cart 컴포넌트는 메인페이지에서 보여지지 않기 때문에 급하게 로딩 할 필요가 없다.
+//이러케 하면 똑같이 import는 된다. 다만 필요해 질 때 import해달라는 것! 그럼 자원 절약이 되겠다. 초반부터 힘 뺄 필요 없으니.
+//그럼 사이트 발행 할 때 별도의 js파일로 분리 되는 것.
+//단점도 물론 있다. 사용자가 해당 페이지로 방문 할 때 지연 시간이 있을 수 있다. 로딩을 해야 하니까!
+//-- 이럴 땐 Suspense를 사용 할 수 있다.
+//import 해오고 해당 컴포넌트를 감싸주면 된다.
+//<Suspense fallback={<div>로딩중입니다!</div>}>
+//해당 컴포넌트 말고 routes 밖에서 한 번에 감싸줘도 된다. 일일이 할 필요 없다면.
+
+const ProductDetail = lazy(() => import('./components/ProductDetail.js'));
+const Cart = lazy(() => import('./components/Cart.js'));
 
 export let Context1 = createContext();
 
@@ -113,7 +137,9 @@ function App() {
           path="/detail/:id"
           element={
             <Context1.Provider value={{ stock }}>
-              <ProductDetail products={products} />
+              <Suspense fallback={<div>로딩중입니다!</div>}>
+                <ProductDetail products={products} />
+              </Suspense>
             </Context1.Provider>
           }
         />
