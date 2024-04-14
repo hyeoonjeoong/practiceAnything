@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCount, minusCount, deleteItem } from '../store.js';
 import { changeName, increase } from '../store/userSlice.js';
+import Practice from './Practice.js';
 
 //✅ 경우에 따라서 다른 html 태그들을 보여주고 싶은 경우
 //state를 만들어놓고 if문으로 state를 다르게 하는 방법도 있지만, object/array 자료형을 응용해서 할 수도 있다.
@@ -130,6 +131,7 @@ const Cart = () => {
         </tbody>
       </Table>
       <div>{moreInfo[nowTab]}</div>
+      <Practice></Practice>
     </>
   );
 };
