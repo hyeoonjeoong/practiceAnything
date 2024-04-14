@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCount, minusCount, deleteItem } from '../store.js';
@@ -14,7 +14,34 @@ const moreInfo = {
   refund: <p>환불약관</p>,
 };
 
+//✅ memo 사용해보기. 전달받는 props가 변할때만 재렌더링해준다. 그럼 쓸데없는 재렌더링을 막아주겠다.
+//얘도 막 쓴다고 좋은건 아니다. 어쨌든 이전 props와 비교를 해야 하기 때문에 props가 복잡하다면 연산과정이 또 오래걸릴 수 있다.
+// function Child() {
+//   console.log('재렌더링!');
+//   return <div>자식 컴포넌트 재렌더링 막기!</div>;
+// }
+let Child = memo(function () {
+  console.log('memo 재렌더링!');
+  return <div>자식 컴포넌트 재렌더링 막기!</div>;
+});
+
+//✅ useMemo(): 메모이제이션을 통해 함수의 리턴 값을 재사용할 수 있게 해주는 훅 (메모지에이션 된 값을 반환)
+//하나만 바뀌면 되는데 전체가 다 다시 렌더링 되는 건 비 효율적! 이 때 사용한다.
+//불필요한 연산을 방지해주는 훅이다. 의존성 배열을 등록해 해당 변수가 바뀌었을 때 연산하도록 해준다.
+
+//-- ✅ useEffect, useMemo 의 차이는? --> 실행 시점의 차이.
+//useEffect는 html 보여주는 것(해당 컴포넌트의 렌더링이 완료 된 이후) 실행이 끝나면 내부 코드가 실행된다.
+//useMemo는 렌더링 될 때 내부 코드가 실행된다.
+function ChileUseMemo() {
+  return <div>반복문 10억번 돌린 결과</div>;
+}
+
 const Cart = () => {
+  //✅ useMemo()
+  let useMemoResult = useMemo(() => {
+    return ChileUseMemo();
+  }, []);
+
   //moreInfo에 지정해 줄 현재 상태.
   const nowTab = 'info';
 
@@ -43,8 +70,17 @@ const Cart = () => {
   //dispatch(state변경함수()) 이러케 감싸서 사용.
   let dispatch = useDispatch();
 
+  let [count, setCount] = useState(0);
   return (
     <>
+      <Child count={count}></Child>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        +++
+      </button>
       {state.user.name}의 장바구니. 나이는 {state.user.age}
       <button onClick={() => dispatch(increase(10))}>나이더하기</button>
       <button onClick={() => dispatch(changeName())}>이름바꾸기</button>
