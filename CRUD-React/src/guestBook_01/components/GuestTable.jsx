@@ -1,45 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 const GuestTable = ({ content, updateContent }) => {
   const [isAbleEdit, setIsAbleEdit] = useState(false);
 
-  const [inputPw, setInputPw] = useState("");
+  const [inputPw, setInputPw] = useState('');
   const [editedContent, setEditedContent] = useState(content.inputText);
-  const [newContent, setNewContent] = useState("");
+  const [newContent, setNewContent] = useState('');
   const [clickedData, setClickedData] = useState({});
-  const [clickedDataId, setClickedDataId] = useState("");
+  const [clickedDataId, setClickedDataId] = useState('');
+
+  const handleDel = (data) => {
+    console.log('비밀번호: ', data.pw);
+    const userInput = window.prompt('비밀번호를 입력해주세요.');
+    if (data.pw === userInput) {
+      const updatedContent = content.filter((e) => e.id !== data.id);
+      updateContent(updatedContent);
+    } else {
+      alert('비밀번호가 일치하지 않아 삭제가 불가능합니다.');
+    }
+  };
 
   const handleEdit = (data) => {
-    console.log("비밀번호: ", data.pw);
-    const userInput = window.prompt("비밀번호를 입력해주세요.");
+    console.log('비밀번호: ', data.pw);
+    const userInput = window.prompt('비밀번호를 입력해주세요.');
 
     if (data.pw === userInput) {
       setIsAbleEdit(true);
       setClickedDataId(data.id);
       setClickedData(data);
     } else {
-      alert("비밀번호가 일치하지 않습니다.");
+      alert('비밀번호가 일치하지 않습니다.');
       setIsAbleEdit(false);
     }
   };
 
   const handleEditOk = () => {
-    console.log("수정할 글 Id: ", clickedDataId);
-    console.log("editedContent: ", editedContent);
+    console.log('수정할 글 Id: ', clickedDataId);
+    console.log('editedContent: ', editedContent);
     const updatedContent = content.map((data) => {
       if (data.id === clickedDataId) {
-        console.log("data.id", data.id);
-        console.log("data", data);
+        console.log('data.id', data.id);
+        console.log('data', data);
         return {
           ...data,
           inputText: editedContent,
         };
       }
-      setEditedContent("");
+      setEditedContent('');
       return data; // 조건에 맞지 않는 경우 원래 데이터를 반환!!
     });
     updateContent(updatedContent);
-    console.log("updated clickedData: ", clickedData);
+    console.log('updated clickedData: ', clickedData);
     setIsAbleEdit(false);
   };
 
@@ -99,7 +110,14 @@ const GuestTable = ({ content, updateContent }) => {
                         >
                           수정
                         </button>
-                        <button className="btn-del">삭제</button>
+                        <button
+                          className="btn-del"
+                          onClick={() => {
+                            handleDel(data);
+                          }}
+                        >
+                          삭제
+                        </button>
                       </>
                     )}
                   </div>
