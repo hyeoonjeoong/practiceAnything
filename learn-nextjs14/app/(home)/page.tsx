@@ -8,6 +8,9 @@
 //-- 그리고 로딩 state도 서버로 옮겨갔다. 클라이언트 측이였다면 화면 상 로딩중이라는 것을 볼 수 있지만,
 //지금은 서버에게 있기 때문에 클라이언트 측에서 직접적으로 볼 수 없다. setTimeout이 걸려있다면 5초가 될 때 까지 페이지 이동도 안된다.
 //서버로부터의 해당 작업이 끝날 때 까지 사용자에게 어떤 화면도 표시되지 않는 것.
+//--> 서버에서 데이터가 fetch되기 때문에 코드는 사용자에게 전달되지 않는다. 결국 안전하다! 노출되지 않으니!
+//✅ 그럼 여기서 Loading은 어떻게 보여주지? 서버에서 준비하는 동안 클라이언트는 아무것도 못봐야 하나?
+//--> loading.tsx 페이지를 만들어주자!
 
 import { resolve } from 'path';
 
@@ -28,6 +31,7 @@ async function getMovies() {
 }
 
 export default async function HomePage() {
+  //async여야 하는 이유? 데이터 가져올 동안 기다려야 하니까! 기다리는 동안은 로딩 컴포넌트 보여줄거다.
   const movies = await getMovies();
   return <div>{JSON.stringify(movies)}</div>;
 }
