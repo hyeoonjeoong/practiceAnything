@@ -12,20 +12,21 @@
 //✅ 그럼 여기서 Loading은 어떻게 보여주지? 서버에서 준비하는 동안 클라이언트는 아무것도 못봐야 하나?
 //--> loading.tsx 페이지를 만들어주자!
 
+import Link from 'next/link';
 import { resolve } from 'path';
 
 export const metadata = {
   title: 'Home',
 };
 
-const URL = 'https://nomad-movies.nomadcoders.workers.dev/movies';
+export const API_URL = 'https://nomad-movies.nomadcoders.workers.dev/movies';
 
 async function getMovies() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   console.log('fetching! 서버에서 해준다!');
   //return fetch(URL).then(response => response.json())
   //위 1줄이랑 아래 3줄 똑같징
-  const response = await fetch(URL);
+  const response = await fetch(API_URL);
   const json = await response.json();
   return json;
 }
@@ -33,7 +34,17 @@ async function getMovies() {
 export default async function HomePage() {
   //async여야 하는 이유? 데이터 가져올 동안 기다려야 하니까! 기다리는 동안은 로딩 컴포넌트 보여줄거다.
   const movies = await getMovies();
-  return <div>{JSON.stringify(movies)}</div>;
+  return (
+    <>
+      <div>
+        {movies.map((movie) => (
+          <li key={movie.id}>
+            <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        ))}
+      </div>
+    </>
+  );
 }
 
 //⬇⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
