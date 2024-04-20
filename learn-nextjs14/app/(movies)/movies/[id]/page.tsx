@@ -1,19 +1,25 @@
 import { promises } from 'dns';
 import { API_URL } from '../../../(home)/page';
+import MovieInfo from '../../../../components/movie-info';
+import MovieVideos from '../../../../components/movie-videos';
+import { Suspense } from 'react';
 
-async function getMovie(id: string) {
-  console.log(`Fetching movie: ${Date.now()}`);
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  const response = await fetch(`${API_URL}/${id}`);
-  return response.json();
-}
+//--> components > movie-info.tsx 로 이동! (컴포넌트 분리 ☑️)
+// async function getMovie(id: string) {
+//   console.log(`Fetching movie: ${Date.now()}`);
+//   await new Promise((resolve) => setTimeout(resolve, 5000));
+//   const response = await fetch(`${API_URL}/${id}`);
+//   return response.json();
+// }
 
-async function getVideos(id: string) {
-  console.log(`Fetching videos: ${Date.now()}`);
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  const response = await fetch(`${API_URL}/${id}/videos`);
-  return response.json();
-}
+//--> components > movie-videos.tsx 로 이동! (컴포넌트 분리 ☑️)
+// async function getVideos(id: string) {
+//   console.log(`Fetching videos: ${Date.now()}`);
+//   await new Promise((resolve) => setTimeout(resolve, 5000));
+//   const response = await fetch(`${API_URL}/${id}/videos`);
+//   return response.json();
+// }
+
 export default async function MovieDetail({
   params: { id },
 }: {
@@ -26,13 +32,19 @@ export default async function MovieDetail({
   //getMovie를 하고 결과를 가지고 있고, getMovie를 하고 결과를 가지고 있다가
   //결과값으로 이루어진 배열을 준다.
   //Promise.all([getMovie(id),getVideos(id) ])
-  //-- 변수에 저장해야하니 이렇게 하자. 결과값으로 array를 주기 때문.
-  const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
+  //-- 변수에 저장해야하니 이렇게 하자. 결과값으로 array를 주기 때문. (컴포넌트 분리 ☑️)
+  //const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
   console.log('end fetching');
 
   return (
     <>
-      <h1>{movie.title}</h1>
+      <h3>Movie Detail Page!</h3>
+      <Suspense fallback={<h2>Loading movie info...</h2>}>
+        <MovieInfo id={id} />
+      </Suspense>
+      <Suspense fallback={<h2>Loading movie videos...</h2>}>
+        <MovieVideos id={id} />
+      </Suspense>
     </>
   );
 }
@@ -51,8 +63,8 @@ export default async function MovieDetail({
 //백에서 실행, 터미널에는 아래처럼 찍힌다.
 //{ params: { id: '811811' }, searchParams: { region: 'kr', page: '2' } }
 
+//-------------✅ Parallel Requests - 병렬적으로 데이터 fetch하기
 //⬇⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
-//-------------✅ Parallel Requests
 // async function getMovie(id: string) {
 //   await new Promise((resolve) => setTimeout(resolve, 2000));
 //   const response = await fetch(`${API_URL}/${id}`);
@@ -88,3 +100,20 @@ export default async function MovieDetail({
 //--> 근데 이건 React에서의 특징.
 
 //⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️⬆️
+
+//✅ 근데 어쨌든 함수가 끝날 때 까지 기다려야 한다. UI는 보이지 않는다. 결국 둘 다 기다려야 하는 것.
+//이렇게 해주자.
+//동시에 시작한다! 근데 먼저 준비된 게 있으면? 보여준다. 그럼 기다릴 필요 없다.
+
+//page에서 데이터를 fetch하는 건 좋다.
+//그럼 그 과정에서 자연스럽게 Loading 컴포넌트를 통해 로딩화면을 보여줄 수 있다.
+//-- 하지만 데이터 소스가 여러개라면?
+//✅ suspense를 써야 한다.
+//--> components > movie-videos.tsx 로 가자. getVideos도 이동! (컴포넌트 분리 ☑️)
+
+//Suspense로 해당 컴포넌트 감싸주면 된다.
+//Suspense component에는 fallback이라는 prop이 있고,
+//얘는 component가 await되는 동안 표시 할 메시지를 render 할 수 있게 해준다.
+//기본적으로 다른 component를 render 할 수 있는 것.
+//--> page의 어느 부분이 로딩중인지 더 명시적으로 알 수 있다.
+//이전에 Loading컴포넌트는 페이지 전체가 로딩상태였다.
