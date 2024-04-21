@@ -14,6 +14,7 @@
 
 import Link from 'next/link';
 import { resolve } from 'path';
+import Movie from '../../components/movie';
 
 export const metadata = {
   title: 'Home',
@@ -38,11 +39,21 @@ export default async function HomePage() {
     <>
       <div>
         {movies.map((movie) => (
+          <Movie
+            key={movie.id}
+            id={movie.id}
+            poster_path={movie.poster_path}
+            title={movie.title}
+          />
+        ))}
+      </div>
+      {/* <div>
+        {movies.map((movie) => (
           <li key={movie.id}>
             <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
           </li>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
