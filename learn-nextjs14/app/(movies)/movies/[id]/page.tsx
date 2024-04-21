@@ -117,3 +117,20 @@ export default async function MovieDetail({
 //기본적으로 다른 component를 render 할 수 있는 것.
 //--> page의 어느 부분이 로딩중인지 더 명시적으로 알 수 있다.
 //이전에 Loading컴포넌트는 페이지 전체가 로딩상태였다.
+
+//✅ ✅ ✅ 정리
+// server component를 통해 데이터 fetch 시 대기하는 동안 클라이언트 측 UI는 보이지 않는다.
+// 함수 실행 시 데이터를 가져올 때 까지 await해야 하니까! 데이터를 가져와야 보여줄 수 있으니깡
+// 서버 응답을 기다리는 중이기 때문! 그럼 user는 뭘 보고 있어야 하나?
+// page의 UI를 기다리는 동안 Loading component를 보여 줄 수 있다.
+// -- 근데 데이터 fetch 함수 여러개가 필요하다면?
+// 하나 끝나고 다음 꺼 할때까지 언제 다 기다려? 동시에 요청하면 안되나?
+// 할 수 있다. Promise.All 을 사용하면 된다.
+// 동시에 요청을 할 수 있지만 어쨌든 기다리는동안 UI를 볼 수 없는 건 똑같다.
+// 그럼 기다리는 동안 Loading component 보여줘도 되지 않나?
+// 그럼 페이지 전체가 Loading page만 보여져버린다. (5개 요청이면 5개 다 완료될 때 까지 로딩페이지만..?)
+// -- suspense를 써보자.
+// 로딩상태를 분리할 수 있게 해준다. 즉 일부만 로딩중이라고 알려 줄 수 있게 되는 것.
+// 굳이 전체 페이지를 Loading page로 만드는 게 아니라, 컴포넌트를 분리시켜 해당 부분만 로딩을 표시할 수 있다.
+// 컴포넌트를 async로 바꾸고, 불러올 때 suspense로 감싸주고 fallback을 사용해주면 된다.
+// React에서 처럼 isLoading, setLoading와 같은 useState를 만들 필요가 없다.
