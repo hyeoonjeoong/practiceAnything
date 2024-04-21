@@ -1,0 +1,24 @@
+.nav {
+  background-color: rgb(102, 98, 94);
+  padding: 50px 70px;
+}
+
+.list {
+  display: flex;
+}
+
+/* ✅ CSS Modules
+아래처럼 작성하면 안된다. UI Selector가 달라진다.
+모든 UI에 적용될 수 있다. 일반적인 건 global css에 작성해주면 된다. 
+
+ul{
+  display: flex;
+}
+
+.nav ul {
+  display: flex;
+}
+
+-- 아니면 className을 하나 더 만들어서 사용하든가!
+
+*/
