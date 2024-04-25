@@ -1,8 +1,9 @@
 import { promises } from 'dns';
 import { API_URL } from '../../../(home)/page';
-import MovieInfo from '../../../../components/movie-info';
+import MovieInfo, { getMovie } from '../../../../components/movie-info';
 import MovieVideos from '../../../../components/movie-videos';
 import { Suspense } from 'react';
+import { title } from 'process';
 
 //--> components > movie-info.tsx 로 이동! (컴포넌트 분리 ☑️)
 // async function getMovie(id: string) {
@@ -20,11 +21,28 @@ import { Suspense } from 'react';
 //   return response.json();
 // }
 
-export default async function MovieDetail({
-  params: { id },
-}: {
+interface IParams {
   params: { id: string };
-}) {
+}
+//--> ✅ Dynamic Metadata
+//generateMetadata 함수는 동적인 제목을 갖고 있는 페이지에서 사용할 수 있다.
+//해당 페이지는 [id]값에 따라 동적으로 페이지 이름, 제목이 바뀌어야 한다.
+//--근데 얘는 어떻게 동작하는거?
+//페이지 component가 params에서 url의 id를 props로 전달받는 것 처럼 같은 일이 일어난다.
+//똑같이 params와 id를 지정해주면 된다.
+//-- 프레임워크는 컴포넌트와 props가 호출 될 것을 알고 있다. 넘어오는 prams도 함께.
+//이 때 generateMetadata 도 같은 걸 전달 받게 되는 것.
+//--> 근데 Metadata 때문에 api호출???
+//이전 버전이면 좋지 않다. 근데 최신 버전은 fetch한 데이터를 캐싱한다!
+//처음에는 fetch를 하겠지만, 이후 동일한 요청에서는 캐시 된 응답을 받게 된다. 즉 api가 호출되는 것이 아니다.
+export async function generateMetadata({ params: { id } }: IParams) {
+  const movie = await getMovie(id);
+  return {
+    title: movie.title,
+  };
+}
+
+export default async function MovieDetailPage({ params: { id } }: IParams) {
   console.log('=============');
   console.log('start fetching');
   //--> ✅ promise.All
