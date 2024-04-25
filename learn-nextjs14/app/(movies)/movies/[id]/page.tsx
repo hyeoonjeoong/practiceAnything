@@ -1,5 +1,6 @@
 import { promises } from 'dns';
-import { API_URL } from '../../../(home)/page';
+import { API_URL } from '../../../constants';
+
 import MovieInfo, { getMovie } from '../../../../components/movie-info';
 import MovieVideos from '../../../../components/movie-videos';
 import { Suspense } from 'react';
@@ -24,6 +25,7 @@ import { title } from 'process';
 interface IParams {
   params: { id: string };
 }
+
 //--> ✅ Dynamic Metadata
 //generateMetadata 함수는 동적인 제목을 갖고 있는 페이지에서 사용할 수 있다.
 //해당 페이지는 [id]값에 따라 동적으로 페이지 이름, 제목이 바뀌어야 한다.
