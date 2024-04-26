@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas></canvas>
-    <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
-    <div>
+    <div class="color-options">
       <input type="color" id="color" />
       <div class="color-option" style="background-color: #f6e58d;" data-color="#f6e58d"></div>
       <div class="color-option" style="background-color: #ffbe76;" data-color="#ffbe76"></div>
@@ -32,12 +30,18 @@
       <div class="color-option" style="background-color: #130f40;" data-color="#130f40"></div>
       <div class="color-option" style="background-color: #535c68;" data-color="#535c68"></div>
     </div>
-    <button id="mode-btn">Fill</button>
-    <button id="destroy-btn">Destroy</button>
-    <button id="eraser-btn">Erase</button>
-    <input type="file" accept="image/*" id="file" />
-    <button id="save">Save Image</button>
-    <input type="text" placeholder="Write and the double click" id="text"/>
+    <canvas></canvas>
+    <div id="btns">
+      <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
+      <button id="mode-btn">Fill</button>
+      <button id="destroy-btn">Destroy</button>
+      <button id="eraser-btn">Erase</button>
+      <!-- 여기서 파일은 배열로 들어온다. 왜? input file에는 multiple 속성을 추가 할 수 있기 때문 -->
+      <input type="file" accept="image/*" id="file" />
+      <button id="save">Save Image</button>
+      <input type="text" placeholder="Write and the double click" id="text" />
+
+    </div>
     <script src="app.js"></script>
   </body>
 </html>

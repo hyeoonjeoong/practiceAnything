@@ -92,8 +92,8 @@ function onEraserClick() {
 
 function onFileChange(event) {
   console.dir(event.target);
-  const file = event.target.files[0];
-  const url = URL.createObjectURL(file);
+  const file = event.target.files[0]; //유저가 업로드 한 파일은 브라우저의 메모리에 저장된다.
+  const url = URL.createObjectURL(file); //메소드를 이용해 해당 파일의 브라우저 메모리 url을 가져온다.
   console.log(url);
   const image = new Image();
   image.src = url; //<img src=""/> 와 같다.
@@ -130,7 +130,8 @@ function onSaveClick() {
   console.log(canvas.toDataURL());
   const url = canvas.toDataURL();
   const a = document.createElement('a'); //a태그를 생성해 가짜 링크 만들기
-  a.href = url;
+  console.log(a);
+  a.href = url; //canvas에서 얻은 링크로 이동
   a.download = 'myDrawing.png'; //해당 파일명으로 저장되도록 설정
   a.click(); //--> 링크를 클릭하면 파일이 다운로드 된다.
 }
