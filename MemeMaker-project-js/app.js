@@ -1,3 +1,4 @@
+const saveBtn = document.getElementById('save');
 const textInput = document.getElementById('text');
 const fileInput = document.getElementById('file');
 const modeBtn = document.getElementById('mode-btn');
@@ -122,6 +123,18 @@ function onDoubleClick(event) {
   }
 }
 
+//-- toDataURL() 메서드는 이미지를 돌려준다. base64로 인코딩 되어있다.
+//url로 인코딩 된 이미지를 얻을 수 있다.
+//--> canvas에 그린 그림의 url링크를 가져와 저장!
+function onSaveClick() {
+  console.log(canvas.toDataURL());
+  const url = canvas.toDataURL();
+  const a = document.createElement('a'); //a태그를 생성해 가짜 링크 만들기
+  a.href = url;
+  a.download = 'myDrawing.png'; //해당 파일명으로 저장되도록 설정
+  a.click(); //--> 링크를 클릭하면 파일이 다운로드 된다.
+}
+
 canvas.addEventListener('dblclick', onDoubleClick);
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('mousedown', startPainting);
@@ -140,6 +153,7 @@ destroyBtn.addEventListener('click', onDestroyClick);
 eraserBtn.addEventListener('click', onEraserClick);
 
 fileInput.addEventListener('change', onFileChange);
+saveBtn.addEventListener('click', onSaveClick);
 
 //-----------------------------------------------------------------
 //--------------사각형 그려보기
