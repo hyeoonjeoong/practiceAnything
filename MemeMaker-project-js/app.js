@@ -1,3 +1,4 @@
+const textInput = document.getElementById('text');
 const fileInput = document.getElementById('file');
 const modeBtn = document.getElementById('mode-btn');
 const destroyBtn = document.getElementById('destroy-btn');
@@ -17,6 +18,7 @@ const CANVAS_HEIGHT = 800;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = 'round';
 
 let isPainting = false;
 let isFilling = false;
@@ -100,6 +102,27 @@ function onFileChange(event) {
   };
 }
 
+function onDoubleClick(event) {
+  //save()는 ctx의 현재 상태, 색상, 스타일 등 모든 것을 저장해준다.
+  //글자를 넣을 떄는 굵기1, 글자 적고 난 후에는 원래의 굵기로 돌아가기 위해 값을 저장.
+  //save()를 통해 수정이 가능, 수정 완료 시에는 restore() 해주면 된다. (기존의 체크포인트로 돌아간다.)
+  //이 사이에서는 어떤 수정을 하던 저장 되지 않는다.
+  //--> 변경되는 코드가 실행되기 전에 저장을 하기 때문.
+  //--> save()로 이전 내용을 저장, 수정, restore()로 되돌아가기.
+  ctx.save();
+  const text = textInput.value;
+  if (text !== '') {
+    ctx.lineWidth = 1;
+    ctx.font = '68px serif';
+    //ctx.strokeText(text, event.offsetX, event.offsetY);
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    console.log(event.offsetX, event.offsetY);
+    ctx.restore();
+    textInput.value = '';
+  }
+}
+
+canvas.addEventListener('dblclick', onDoubleClick);
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('mousedown', startPainting);
 canvas.addEventListener('mouseup', cancelPainting);
