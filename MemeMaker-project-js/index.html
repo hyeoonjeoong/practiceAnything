@@ -31,15 +31,18 @@
       <div class="color-option" style="background-color: #535c68;" data-color="#535c68"></div>
     </div>
     <canvas></canvas>
-    <div id="btns">
+    <div class="btns">
       <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
-      <button id="mode-btn">Fill</button>
-      <button id="destroy-btn">Destroy</button>
-      <button id="eraser-btn">Erase</button>
-      <!-- 여기서 파일은 배열로 들어온다. 왜? input file에는 multiple 속성을 추가 할 수 있기 때문 -->
-      <input type="file" accept="image/*" id="file" />
-      <button id="save">Save Image</button>
-      <input type="text" placeholder="Write and the double click" id="text" />
+      <button id="mode-btn">🩸 Fill</button>
+      <button id="destroy-btn">💣 Destroy</button>
+      <button id="eraser-btn">❌ Erase</button>
+      <label for="file">
+        💅🏻 Add Photo
+        <!-- 여기서 파일은 배열로 들어온다. 왜? input file에는 multiple 속성을 추가 할 수 있기 때문 -->
+        <input type="file" accept="image/*" id="file" />
+      </label>
+      <input type="text" placeholder="Add text here..." id="text" />
+      <button id="save">🖼 Save Image</button>
 
     </div>
     <script src="app.js"></script>
