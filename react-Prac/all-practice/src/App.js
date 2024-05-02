@@ -1,13 +1,13 @@
-import "./App.css";
-import Products from "./components/Products";
-import CheckBox from "./components/CheckBox";
-import CheckBox2 from "./components/CheckBox2";
-import Bank from "./components/Bank";
-import Barchart from "./components/Graph";
-import CommentList from "./firstMetReact/CommentList";
-import ReactHookForm from "./components/ReactHookForm";
-import FileReader from "./components/FileReader";
-
+import './App.css';
+import Products from './components/Products';
+import CheckBox from './components/CheckBox';
+import CheckBox2 from './components/CheckBox2';
+import Bank from './components/Bank';
+import Barchart from './components/Graph';
+import CommentList from './firstMetReact/CommentList';
+import ReactHookForm from './components/ReactHookForm';
+import FileReader from './components/FileReader';
+import UseTabs from './hooks/UseTabs';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -31,22 +31,24 @@ function App() {
 
   return (
     <>
-      <h3 style={{ backgroundColor: "bisque" }}>DataTable Practice</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>DataTable Practice</h3>
       <Products />
-      <h3 style={{ backgroundColor: "bisque" }}>Check Box Practice 01</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>Check Box Practice 01</h3>
       <CheckBox />
-      <h3 style={{ backgroundColor: "bisque" }}>Check Box Practice 02</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>Check Box Practice 02</h3>
       <CheckBox2 />
-      <h3 style={{ backgroundColor: "bisque" }}>Bank Practice</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>Bank Practice</h3>
       <Bank />
       {/* <h3 style={{ backgroundColor: "bisque" }}>Barchart nivo</h3>
       <Barchart /> */}
-      <h3 style={{ backgroundColor: "bisque" }}>CommentList Practice</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>CommentList Practice</h3>
       <CommentList />
-      <h3 style={{ backgroundColor: "bisque" }}>React hook form Practice</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>React hook form Practice</h3>
       <ReactHookForm />
-      <h3 style={{ backgroundColor: "bisque" }}>FileReader</h3>
+      <h3 style={{ backgroundColor: 'bisque' }}>FileReader</h3>
       <FileReader />
+      <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useTabs</h3>
+      <UseTabs />
     </>
   );
 }
