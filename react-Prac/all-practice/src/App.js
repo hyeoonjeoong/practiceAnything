@@ -10,6 +10,7 @@ import FileReader from './components/FileReader';
 import UseTabs from './hooks/UseTabs';
 import TitleHook from './hooks/TitleHook';
 import ClickHook from './hooks/ClickHook';
+import ConfirmHook from './hooks/ConfirmHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -55,6 +56,8 @@ function App() {
       <TitleHook />
       <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useClick</h3>
       <ClickHook />
+      <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useConfirm</h3>
+      <ConfirmHook />
 
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
