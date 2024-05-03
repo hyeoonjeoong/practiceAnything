@@ -11,6 +11,7 @@ import UseTabs from './hooks/UseTabs';
 import TitleHook from './hooks/TitleHook';
 import ClickHook from './hooks/ClickHook';
 import ConfirmHook from './hooks/ConfirmHook';
+import PreventLeaveHook from './hooks/PreventLeaveHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -58,7 +59,10 @@ function App() {
       <ClickHook />
       <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useConfirm</h3>
       <ConfirmHook />
-
+      <h3 style={{ backgroundColor: 'bisque' }}>
+        React Hooks - usePreventLeave
+      </h3>
+      <PreventLeaveHook />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>
