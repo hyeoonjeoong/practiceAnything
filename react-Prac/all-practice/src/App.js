@@ -8,6 +8,7 @@ import CommentList from './firstMetReact/CommentList';
 import ReactHookForm from './components/ReactHookForm';
 import FileReader from './components/FileReader';
 import UseTabs from './hooks/UseTabs';
+import TitleHook from './hooks/TitleHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -49,6 +50,11 @@ function App() {
       <FileReader />
       <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useTabs</h3>
       <UseTabs />
+      <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useTitle</h3>
+      <TitleHook />
+
+      {/* -------------------------------------------------- */}
+      <div style={{ marginBottom: '150px' }}></div>
     </>
   );
 }
