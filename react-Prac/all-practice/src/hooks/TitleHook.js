@@ -20,7 +20,7 @@ const useTitle = (initialTitle) => {
 const TitleHook = () => {
   const titleUpdater = useTitle('Loading...');
   setTimeout(() => titleUpdater('Home'), 3000);
-  return <div>TitleHook</div>;
+  return <div>Title 바뀌지롱</div>;
 };
 
 export default TitleHook;

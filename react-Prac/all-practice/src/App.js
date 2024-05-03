@@ -9,6 +9,7 @@ import ReactHookForm from './components/ReactHookForm';
 import FileReader from './components/FileReader';
 import UseTabs from './hooks/UseTabs';
 import TitleHook from './hooks/TitleHook';
+import ClickHook from './hooks/ClickHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -52,6 +53,8 @@ function App() {
       <UseTabs />
       <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useTitle</h3>
       <TitleHook />
+      <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useClick</h3>
+      <ClickHook />
 
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
