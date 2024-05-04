@@ -12,6 +12,7 @@ import TitleHook from './hooks/TitleHook';
 import ClickHook from './hooks/ClickHook';
 import ConfirmHook from './hooks/ConfirmHook';
 import PreventLeaveHook from './hooks/PreventLeaveHook';
+import BeforeLeaveHook from './hooks/BeforeLeaveHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -63,6 +64,10 @@ function App() {
         React Hooks - usePreventLeave
       </h3>
       <PreventLeaveHook />
+      <h3 style={{ backgroundColor: 'bisque' }}>
+        React Hooks - useBeforeLeave
+      </h3>
+      <BeforeLeaveHook />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>
