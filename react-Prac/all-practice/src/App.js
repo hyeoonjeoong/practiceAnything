@@ -13,6 +13,7 @@ import ClickHook from './hooks/ClickHook';
 import ConfirmHook from './hooks/ConfirmHook';
 import PreventLeaveHook from './hooks/PreventLeaveHook';
 import BeforeLeaveHook from './hooks/BeforeLeaveHook';
+import ScrollHook from './hooks/ScrollHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -68,6 +69,8 @@ function App() {
         React Hooks - useBeforeLeave
       </h3>
       <BeforeLeaveHook />
+      <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useScroll</h3>
+      <ScrollHook />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>
