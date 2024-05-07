@@ -17,6 +17,7 @@ import ScrollHook from './hooks/ScrollHook';
 import FullScreenHook from './hooks/FullScreenHook';
 import NotificationHook from './hooks/NotificationHook';
 import AxiosHook from './hooks/AxiosHook';
+import IdHook from './hooks/IdHook';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -82,6 +83,8 @@ function App() {
       <NotificationHook />
       <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useAxios</h3>
       <AxiosHook />
+      <h3 style={{ backgroundColor: 'bisque' }}>React Hooks - useId</h3>
+      <IdHook />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>
