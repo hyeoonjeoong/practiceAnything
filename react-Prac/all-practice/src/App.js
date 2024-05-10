@@ -20,6 +20,7 @@ import AxiosHook from './hooks/AxiosHook';
 import IdHook from './hooks/IdHook';
 import LayoutEffectHook from './hooks/LayoutEffectHook';
 import TodoList from './components/TodoList';
+import TodoListRefactor from './components/TodoListRefactor';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -92,7 +93,9 @@ function App() {
       </h3>
       <LayoutEffectHook />
       <h3 style={{ backgroundColor: 'bisque' }}>TodoList</h3>
-      <TodoList />
+      {/* <TodoList /> */}
+      <h3 style={{ backgroundColor: 'bisque' }}>TodoList-Refactor</h3>
+      <TodoListRefactor />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>

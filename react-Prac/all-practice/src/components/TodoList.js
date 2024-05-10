@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+const filterType = {
+  ALL: 'all',
+  COMPLETED: 'completed',
+  INCOMPLETE: 'incomplete',
+};
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(filterType.ALL);
   const [searchText, setSearchText] = useState('');
 
   const addTodo = () => {
