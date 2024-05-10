@@ -19,6 +19,7 @@ import NotificationHook from './hooks/NotificationHook';
 import AxiosHook from './hooks/AxiosHook';
 import IdHook from './hooks/IdHook';
 import LayoutEffectHook from './hooks/LayoutEffectHook';
+import TodoList from './components/TodoList';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -90,6 +91,8 @@ function App() {
         React Hooks - useLayoutEffect
       </h3>
       <LayoutEffectHook />
+      <h3 style={{ backgroundColor: 'bisque' }}>TodoList</h3>
+      <TodoList />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>

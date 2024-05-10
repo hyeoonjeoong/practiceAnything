@@ -6,7 +6,8 @@
     "Kakao",
     "latlng",
     "naver",
-    "shiba"
+    "shiba",
+    "todos"
   ],
   "prettier.printWidth": 80, // 한 줄에 표시되는 양
   "prettier.tabWidth": 2, // 탭 간격
