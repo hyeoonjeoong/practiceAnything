@@ -21,6 +21,7 @@ import IdHook from './hooks/IdHook';
 import LayoutEffectHook from './hooks/LayoutEffectHook';
 import TodoList from './components/TodoList';
 import TodoListRefactor from './components/TodoListRefactor';
+import MemoCallback from './hooks/MemoCallback';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -96,6 +97,10 @@ function App() {
       {/* <TodoList /> */}
       <h3 style={{ backgroundColor: 'bisque' }}>TodoList-Refactor</h3>
       <TodoListRefactor />
+      <h3 style={{ backgroundColor: 'bisque' }}>
+        React Hooks - useMemo, useCallback
+      </h3>
+      <MemoCallback />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>
