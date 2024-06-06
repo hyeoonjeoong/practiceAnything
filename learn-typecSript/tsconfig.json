@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noImplicitAny": true //type 무조건 적어줘야 한다. any여도 적어야 한다는.
+  }
+}
