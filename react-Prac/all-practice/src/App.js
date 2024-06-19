@@ -22,6 +22,7 @@ import LayoutEffectHook from './hooks/LayoutEffectHook';
 import TodoList from './components/TodoList';
 import TodoListRefactor from './components/TodoListRefactor';
 import MemoCallback from './hooks/MemoCallback';
+import ButtonGroup from './components/ButtonGroup';
 function App() {
   //이렇게 하면 로그인 토큰 저장
   // const login = async () => {
@@ -101,6 +102,8 @@ function App() {
         React Hooks - useMemo, useCallback
       </h3>
       <MemoCallback />
+      <h3 style={{ backgroundColor: 'bisque' }}>ButtonGroup</h3>
+      <ButtonGroup />
       {/* -------------------------------------------------- */}
       <div style={{ marginBottom: '150px' }}></div>
     </>
