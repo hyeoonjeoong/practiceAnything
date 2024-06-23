@@ -20,6 +20,10 @@ export default function Navigation() {
             <Link href="/bottom">Bottom</Link>
             {path === '/bottom' ? '👖' : ''}
           </li>
+          <li>
+            <Link href="/user">User</Link>
+            {path === '/user' ? '👀' : ''}
+          </li>
         </ul>
       </nav>
     </>
