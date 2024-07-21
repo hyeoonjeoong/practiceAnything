@@ -24,6 +24,10 @@ export default function Navigation() {
             <Link href="/user">User</Link>
             {path === '/user' ? '👀' : ''}
           </li>
+          <li>
+            <Link href="/popup">Popup</Link>
+            {path === '/popup' ? '✨' : ''}
+          </li>
         </ul>
       </nav>
     </>
